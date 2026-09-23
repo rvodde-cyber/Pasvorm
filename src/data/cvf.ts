@@ -1,45 +1,17 @@
 export type CultureId = 'clan' | 'adhocracy' | 'market' | 'hierarchy'
 
-export interface CvfCulture {
+export interface CvfItem {
   id: CultureId
   label: string
   color: string
-  description: string
-  traits: string[]
+  question: string
 }
 
-export const cvfCultures: CvfCulture[] = [
-  {
-    id: 'clan',
-    label: 'Clan',
-    color: '#8FB897',
-    description: 'Collegialiteit, mentoring en gedeelde waarden staan centraal.',
-    traits: ['Teamgevoel', 'Participatie', 'Lange-termijn relaties'],
-  },
-  {
-    id: 'adhocracy',
-    label: 'Adhocratie',
-    color: '#D9A85C',
-    description: 'Innovatie, experimenteren en ondernemerschap domineren.',
-    traits: ['Creativiteit', 'Flexibiliteit', 'Risico nemen'],
-  },
-  {
-    id: 'market',
-    label: 'Markt',
-    color: '#D08064',
-    description: 'Resultaten, klantfocus en competitie sturen gedrag.',
-    traits: ['Doelstellingen', 'Prestatiedruk', 'Externe orientatie'],
-  },
-  {
-    id: 'hierarchy',
-    label: 'Hiërarchie',
-    color: '#7FA6D1',
-    description: 'Formele structuren, voorspelbaarheid en efficiëntie zijn leidend.',
-    traits: ['Procedures', 'Stabiliteit', 'Duidelijke lijnen'],
-  },
+export const cvfItems: CvfItem[] = [
+  { id: "clan", label: "Familie", color: "#8FB897", question: "Onze organisatie voelt als een hechte familie; loyaliteit en onderlinge betrokkenheid staan voorop." },
+  { id: "adhocracy", label: "Adhocratie", color: "#D9A85C", question: "Onze organisatie is ondernemend en innovatief; mensen nemen graag risico's en proberen nieuwe dingen." },
+  { id: "market", label: "Markt", color: "#D08064", question: "Onze organisatie is resultaatgericht; concurrentiepositie en het behalen van doelen staan voorop." },
+  { id: "hierarchy", label: "Hi\u00ebrarchie", color: "#7FA6D1", question: "Onze organisatie is gestructureerd en beheerst; formele regels en procedures bepalen wat mensen doen." },
 ]
 
-export const cultureById = Object.fromEntries(cvfCultures.map((c) => [c.id, c])) as Record<
-  CultureId,
-  CvfCulture
->
+export const cultureById = Object.fromEntries(cvfItems.map((c) => [c.id, c])) as Record<CultureId, CvfItem>

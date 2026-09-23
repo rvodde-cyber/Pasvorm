@@ -1,50 +1,13 @@
 export interface GreinerPhase {
   id: number
   title: string
-  subtitle: string
   description: string
-  signal: string
 }
 
 export const phases: GreinerPhase[] = [
-  {
-    id: 1,
-    title: 'Creativiteit',
-    subtitle: 'Greiner fase 1',
-    description:
-      'Het bedrijf groeit door ondernemerschap en informele samenwerking. Rollen overlappen; processen zijn nog weinig gestandaardiseerd.',
-    signal: 'Sterke founders, weinig structuur, veel improvisatie.',
-  },
-  {
-    id: 2,
-    title: 'Richting',
-    subtitle: 'Greiner fase 2',
-    description:
-      'Groei vraag om leiderschap, planning en duidelijke verantwoordelijkheden. Beleid en procedures worden belangrijker.',
-    signal: 'Behoefte aan sturing, functies en heldere besluitvorming.',
-  },
-  {
-    id: 3,
-    title: 'Delegatie',
-    subtitle: 'Greiner fase 3',
-    description:
-      'Managers krijgen mandaat; middenkader groeit. Controle verschuift van directie naar afdelingen en teams.',
-    signal: 'Decentralisatie, behoefte aan managementontwikkeling.',
-  },
-  {
-    id: 4,
-    title: 'Coördinatie',
-    subtitle: 'Greiner fase 4',
-    description:
-      'Complexiteit vraagt om coördinatie tussen afdelingen, gedeelde systemen en formele planningscycli.',
-    signal: 'Silovorming, behoefte aan integratie en overlegstructuren.',
-  },
-  {
-    id: 5,
-    title: 'Samenwerking',
-    subtitle: 'Greiner fase 5',
-    description:
-      'Organisatie investeert in teamgericht werken, gedeelde cultuur en flexibiliteit. HR ondersteunt vernieuwing en leren.',
-    signal: 'Focus op samenwerking, innovatie en continue verbetering.',
-  },
+  { id: 1, title: "Persoonlijke sturing", description: "De organisatie draait op de informele sturing van de oprichter(s)/directie; weinig vaste procedures." },
+  { id: 2, title: "Richting geven", description: "Er zijn functieomschrijvingen en een managementlaag; sturing verloopt via duidelijke instructies vanuit het management." },
+  { id: 3, title: "Delegeren", description: "Leidinggevenden op lagere niveaus krijgen ruimte om zelfstandig te beslissen; management stuurt op resultaten." },
+  { id: 4, title: "Co\u00f6rdineren", description: "Organisatiebrede systemen en procedures; formele planning en control staan centraal." },
+  { id: 5, title: "Samenwerken", description: "De organisatie stuurt op teamwork, flexibele structuren en gezamenlijke probleemoplossing over afdelingen heen." },
 ]

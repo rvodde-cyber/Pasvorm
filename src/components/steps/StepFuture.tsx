@@ -1,60 +1,53 @@
+import { futureOptions } from '../../data/future'
 import type { ScanState } from '../../hooks/useScanState'
-import { StepNav } from './StepPhase'
-
-const options = [
-  {
-    id: 'professionaliseren',
-    title: 'Professionaliseren',
-    text: 'Meer structuur, duidelijke HR-processen en compliance.',
-  },
-  {
-    id: 'groei',
-    title: 'Groei versnellen',
-    text: 'Instroom, ontwikkeling en prestaties beter sturen.',
-  },
-  {
-    id: 'binding',
-    title: 'Binding versterken',
-    text: 'Betrokkenheid, cultuur en leiderschap ontwikkelen.',
-  },
-  {
-    id: 'innovatie',
-    title: 'Innovatie & flexibiliteit',
-    text: 'Experimenteren, leren en samenwerking over silo’s.',
-  },
-]
+import { StepLabel, StepNav } from './StepNav'
 
 export function StepFuture({ scan }: { scan: ScanState }) {
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="font-heading text-2xl font-extrabold text-ink">Toekomstfocus</h2>
-        <p className="mt-2 text-muted">Wat is de belangrijkste HR-beweging de komende 12–24 maanden?</p>
-      </div>
+    <div className="scan-card space-y-5">
+      <StepLabel>Stap 3 van 6 · Toekomstvisie van de leiding</StepLabel>
+      <h2 className="font-heading text-2xl font-extrabold text-ink">Welk scenario past het best?</h2>
+      <p className="text-muted">Welke richting heeft de leiding voor de komende 2–3 jaar voor ogen?</p>
 
-      <ul className="space-y-3">
-        {options.map((o) => {
-          const selected = scan.futureFocus === o.id
+      <ul className="space-y-2">
+        {futureOptions.map((opt) => {
+          const selected = scan.futureId === opt.id
           return (
-            <li key={o.id}>
-              <button
-                type="button"
-                onClick={() => scan.setFutureFocus(o.id)}
-                className={`w-full rounded-xl border px-4 py-4 text-left transition ${
+            <li key={opt.id}>
+              <label
+                className={`flex cursor-pointer gap-3 rounded-xl border px-4 py-3 transition ${
                   selected
                     ? 'border-accent bg-accent/10 ring-1 ring-accent'
                     : 'border-line bg-surface hover:border-accent/40'
                 }`}
               >
-                <span className="font-heading font-bold text-ink">{o.title}</span>
-                <p className="mt-1 text-sm text-muted">{o.text}</p>
-              </button>
+                <input
+                  type="radio"
+                  name="future"
+                  checked={selected}
+                  onChange={() => scan.setFutureId(opt.id)}
+                  className="mt-1 accent-accent"
+                />
+                <span className="flex-1">
+                  <span className="block font-heading font-bold text-ink">{opt.title}</span>
+                  <span className="mt-0.5 block text-sm text-muted">{opt.description}</span>
+                  {opt.hasNote && selected && (
+                    <textarea
+                      rows={2}
+                      value={scan.futureNote}
+                      onChange={(e) => scan.setFutureNote(e.target.value)}
+                      placeholder="Licht toe..."
+                      className="mt-2 w-full rounded-lg border border-line bg-bg2 px-3 py-2 text-sm text-ink"
+                    />
+                  )}
+                </span>
+              </label>
             </li>
           )
         })}
       </ul>
 
-      <StepNav scan={scan} canNext={scan.futureFocus != null} />
+      <StepNav scan={scan} canNext={scan.futureId != null} />
     </div>
   )
 }

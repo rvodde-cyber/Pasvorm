@@ -7,9 +7,10 @@ interface ModalProps {
   title: string
   children: ReactNode
   wide?: boolean
+  eyebrow?: string
 }
 
-export function Modal({ open, onClose, title, children, wide }: ModalProps) {
+export function Modal({ open, onClose, title, children, wide, eyebrow }: ModalProps) {
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
@@ -45,9 +46,16 @@ export function Modal({ open, onClose, title, children, wide }: ModalProps) {
         }`}
       >
         <div className="sticky top-0 flex items-start justify-between gap-4 border-b border-line bg-surface px-5 py-4">
-          <h2 id="modal-title" className="font-heading text-xl font-bold text-ink">
-            {title}
-          </h2>
+          <div>
+            {eyebrow && (
+              <p className="mb-1 text-[11px] font-bold uppercase tracking-widest text-accent">
+                {eyebrow}
+              </p>
+            )}
+            <h2 id="modal-title" className="font-heading text-xl font-bold text-ink">
+              {title}
+            </h2>
+          </div>
           <button
             type="button"
             onClick={onClose}

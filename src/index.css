@@ -13,4 +13,17 @@
   #root {
     @apply min-h-dvh;
   }
+
+  @media (max-width: 720px) {
+    html,
+    body {
+      overflow: auto;
+    }
+  }
+}
+
+@layer components {
+  .scan-card {
+    @apply rounded-2xl border border-line bg-surface p-5 shadow-2xl shadow-black/20 md:p-7;
+  }
 }

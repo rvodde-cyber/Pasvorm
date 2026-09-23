@@ -8,44 +8,11 @@ export interface Bundle {
 }
 
 export const bundles: Bundle[] = [
-  {
-    id: 'basis',
-    label: 'Basis & compliance',
-    color: '#7FA6D1',
-    description:
-      'Wettelijke verplichtingen en fundamentele HR-processen die elke werkgever moet regelen (AMO: randvoorwaarden).',
-  },
-  {
-    id: 'ability',
-    label: 'Ability — Bekwaamheid',
-    color: '#8FB897',
-    description:
-      'Instrumenten die medewerkers in staat stellen goed werk te leveren: selectie, ontwikkeling, functies en prestatie.',
-  },
-  {
-    id: 'motivation',
-    label: 'Motivation — Motivatie',
-    color: '#D08064',
-    description:
-      'Instrumenten die commitment en inzet versterken: beloning, erkenning, arbeidsvoorwaarden en betrokkenheid.',
-  },
-  {
-    id: 'opportunity',
-    label: 'Opportunity — Kansen',
-    color: '#D9A85C',
-    description:
-      'Instrumenten die ruimte geven voor inspraak, mobiliteit, samenwerking en kennisdeling.',
-  },
-  {
-    id: 'ethiek',
-    label: 'Ethiek & vertrouwen',
-    color: '#9B84C4',
-    description:
-      'Instrumenten voor integriteit, veilig gedrag, diversiteit en een cultuur waarin mensen zich gehoord voelen.',
-  },
+  { id: "basis", label: "Basisbundel", color: "#7FA6D1", description: "Wettelijke randvoorwaarden \u2014 zonder deze basis versterkt niets elkaar." },
+  { id: "ability", label: "Ability-bundel", color: "#D08064", description: "Kunnen: wie je aantrekt en hoe je mensen inwerkt en ontwikkelt." },
+  { id: "motivation", label: "Motivation-bundel", color: "#D9A85C", description: "Willen: gesprekscyclus, beloning, loopbaan en erkenning." },
+  { id: "opportunity", label: "Opportunity-bundel", color: "#8FB897", description: "Bijdragen: overleg, autonomie, communicatie en teamontwikkeling." },
+  { id: "ethiek", label: "Ethiek-bundel", color: "#9B84C4", description: "Moreel vakmanschap: gedragscode, dilemmatraining en meldcultuur." },
 ]
 
-export const bundleById = Object.fromEntries(bundles.map((b) => [b.id, b])) as Record<
-  BundleId,
-  Bundle
->
+export const bundleById = Object.fromEntries(bundles.map((b) => [b.id, b])) as Record<BundleId, Bundle>

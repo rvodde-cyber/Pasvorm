@@ -1,17 +1,17 @@
-import type { CultureId } from '../data/cvf'
 import type { BundleId } from '../data/bundles'
 import { bundleById } from '../data/bundles'
 import { instrumentById, instruments, type Instrument } from '../data/instruments'
+import { phases } from '../data/phases'
+import { type CvfScores, cvfShares, dominantCulture } from './culture'
 
-export type RecommendationType = 'legal' | 'phase' | 'anchor' | 'follow-up'
+export type RecommendationType = 'legal' | 'advies' | 'compleet'
 
 export interface Recommendation {
   type: RecommendationType
-  instrument: Instrument
+  instrument?: Instrument
   priorityBundle: BundleId
   vervolg: Instrument[]
   vorm: string
-  conflict?: string
 }
 
 const phasePriorityBundle: Record<number, BundleId> = {
@@ -22,127 +22,100 @@ const phasePriorityBundle: Record<number, BundleId> = {
   5: 'ability',
 }
 
-const cultureVorm: Record<CultureId, string> = {
+const cultureVorm: Record<string, string> = {
   clan: 'als dialoog en persoonlijk gesprek',
   hierarchy: 'als vaste procedure en schriftelijk protocol',
   market: 'gekoppeld aan meetbare resultaten',
   adhocracy: 'als experiment of pilot',
 }
 
-function missingInstruments(present: Set<string>): Instrument[] {
-  return instruments.filter((i) => !present.has(i.id))
+function isPresent(present: Record<string, boolean>, id: string): boolean {
+  return !!present[id]
 }
 
-function countReinforcesToPresent(inst: Instrument, present: Set<string>): number {
-  return inst.reinforces.filter((id) => present.has(id) && id in instrumentById).length
+function visibleInstrument(inst: Instrument, size: number): boolean {
+  if (inst.minSize === 0) return true
+  if (size === 0) return true
+  return size >= inst.minSize
 }
 
-function pickFromBundle(
-  pool: Instrument[],
-  bundle: BundleId,
-  exclude: Set<string>,
-): Instrument | undefined {
-  return pool.find((i) => i.bundle === bundle && !exclude.has(i.id))
-}
-
-function detectConflict(inst: Instrument, culture: CultureId): string | undefined {
-  if (culture === 'clan' && inst.legal) {
-    return undefined
-  }
-  if (culture === 'adhocracy' && inst.bundle === 'basis' && inst.legal) {
-    return 'Formele compliance vraagt om structuur — combineer een pilot met duidelijke minimumnormen.'
-  }
-  if (culture === 'market' && inst.id === 'medezeggenschap') {
-    return 'Inspraak en resultaatdruk vragen om expliciete KPI’s én participatiemomenten.'
-  }
-  if (culture === 'hierarchy' && inst.id === 'kennisdeling') {
-    return 'Kennisdeling vraagt om ruimte naast procedures — plan vaste informele momenten.'
-  }
-  return undefined
+export function bundleStrength(
+  bundleId: BundleId,
+  present: Record<string, boolean>,
+): number {
+  const insts = instruments.filter((i) => i.bundle === bundleId)
+  if (!insts.length) return 0
+  const score = insts.filter((i) => isPresent(present, i.id)).length
+  return Math.round((score / insts.length) * 100)
 }
 
 export function buildRecommendation(
   phaseId: number,
-  cultureId: CultureId,
-  presentIds: string[],
+  cvfScores: CvfScores,
+  present: Record<string, boolean>,
+  orgSize: number,
 ): Recommendation {
-  const present = new Set(presentIds)
-  const missing = missingInstruments(present)
   const priorityBundle = phasePriorityBundle[phaseId] ?? 'ability'
-  const vorm = cultureVorm[cultureId]
-  const used = new Set<string>()
+  const dom = dominantCulture(cvfScores)
+  const vorm = dom ? cultureVorm[dom.id] : ''
 
-  const legalMissing = missing.filter((i) => i.legal)
-  let primary: Instrument
-  let type: RecommendationType
+  const legalMissing = instruments.filter(
+    (i) =>
+      i.legal &&
+      !isPresent(present, i.id) &&
+      visibleInstrument(i, orgSize),
+  )
 
   if (legalMissing.length > 0) {
-    primary = legalMissing[0]
-    type = 'legal'
-  } else {
-    const phasePick = pickFromBundle(missing, priorityBundle, used)
-    if (phasePick) {
-      primary = phasePick
-      type = 'phase'
-    } else {
-      const anchorCandidates = missing
-        .map((i) => ({ i, score: countReinforcesToPresent(i, present) }))
-        .sort((a, b) => b.score - a.score)
-      primary = anchorCandidates[0]?.i ?? missing[0] ?? instruments[0]
-      type = 'anchor'
+    return {
+      type: 'legal',
+      instrument: legalMissing[0],
+      priorityBundle,
+      vervolg: [],
+      vorm,
     }
   }
 
-  used.add(primary.id)
-
-  const vervolgPool = missing.filter((i) => !used.has(i.id))
-  const vervolg: Instrument[] = []
-
-  const phaseSecond = pickFromBundle(vervolgPool, priorityBundle, used)
-  if (phaseSecond) {
-    vervolg.push(phaseSecond)
-    used.add(phaseSecond.id)
+  let candidates = instruments.filter(
+    (i) => i.bundle === priorityBundle && !isPresent(present, i.id),
+  )
+  if (candidates.length === 0) {
+    candidates = instruments.filter((i) => i.bundle !== 'basis' && !isPresent(present, i.id))
   }
 
-  const anchorSorted = vervolgPool
-    .filter((i) => !used.has(i.id))
-    .map((i) => ({ i, score: countReinforcesToPresent(i, present) }))
-    .sort((a, b) => b.score - a.score)
+  candidates.sort((a, b) => {
+    const sa = a.reinforces.filter((r) => isPresent(present, r)).length
+    const sb = b.reinforces.filter((r) => isPresent(present, r)).length
+    return sb - sa
+  })
 
-  if (vervolg.length < 2 && anchorSorted[0]) {
-    vervolg.push(anchorSorted[0].i)
-    used.add(anchorSorted[0].i.id)
+  if (candidates.length === 0) {
+    return { type: 'compleet', priorityBundle, vervolg: [], vorm }
   }
 
-  while (vervolg.length < 2 && vervolgPool.length > 0) {
-    const next = vervolgPool.find((i) => !used.has(i.id))
-    if (!next) break
-    vervolg.push(next)
-    used.add(next.id)
-  }
-
-  const conflict = detectConflict(primary, cultureId)
+  const anchor = candidates[0]
+  const vervolg = (anchor.reinforces ?? [])
+    .filter((r) => !isPresent(present, r) && instrumentById[r] && r !== anchor.id)
+    .slice(0, 2)
+    .map((r) => instrumentById[r])
 
   return {
-    type,
-    instrument: primary,
+    type: 'advies',
+    instrument: anchor,
     priorityBundle,
-    vervolg: vervolg.slice(0, 2),
+    vervolg,
     vorm,
-    conflict,
   }
 }
 
-export function recommendationHeadline(rec: Recommendation): string {
-  const bundleLabel = bundleById[rec.priorityBundle].label
-  switch (rec.type) {
-    case 'legal':
-      return 'Eerst wettelijke basis regelen'
-    case 'phase':
-      return `Prioriteit voor ${bundleLabel}`
-    case 'anchor':
-      return 'Ankerinstrument — versterkt wat al staat'
-    default:
-      return 'Vervolgstap'
-  }
+export function phaseById(id: number) {
+  return phases.find((p) => p.id === id) ?? phases[0]
+}
+
+export function recommendationBundleLabel(rec: Recommendation): string {
+  return bundleById[rec.priorityBundle].label
+}
+
+export function cultureSharePercent(scores: CvfScores, cultureId: string): number {
+  return Math.round(cvfShares(scores)[cultureId as keyof ReturnType<typeof cvfShares>] * 100)
 }

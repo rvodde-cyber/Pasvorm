@@ -1,73 +1,80 @@
-import { bundleById } from '../../data/bundles'
+import { bundles } from '../../data/bundles'
 import { instruments } from '../../data/instruments'
 import type { ScanState } from '../../hooks/useScanState'
-import { StepNav } from './StepPhase'
+import { bundleStrength } from '../../utils/recommendation'
+import { StepLabel, StepNav } from './StepNav'
+
+function visibleInstrument(minSize: number, orgSize: number): boolean {
+  if (minSize === 0) return true
+  if (orgSize === 0) return true
+  return orgSize >= minSize
+}
 
 export function StepInstruments({ scan }: { scan: ScanState }) {
-  const grouped = instruments.reduce(
-    (acc, inst) => {
-      if (!acc[inst.bundle]) acc[inst.bundle] = []
-      acc[inst.bundle].push(inst)
-      return acc
-    },
-    {} as Record<string, typeof instruments>,
-  )
-
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="font-heading text-2xl font-extrabold text-ink">Instrumenten</h2>
-        <p className="mt-2 text-muted">
-          Vink aan wat in uw organisatie al (minimaal) aanwezig is — ook informeel of in ontwikkeling.
-        </p>
-      </div>
+    <div className="scan-card space-y-6">
+      <StepLabel>Stap 5 van 6 · Aanwezige HR-instrumenten</StepLabel>
+      <h2 className="font-heading text-2xl font-extrabold text-ink">
+        Welke HR-instrumenten zijn al structureel aanwezig?
+      </h2>
+      <p className="text-muted">
+        Vink aan welke instrumenten op dit moment structureel worden ingezet. De instrumenten zijn
+        gegroepeerd per bundel — samen versterken zij elkaar.
+      </p>
 
-      <div className="space-y-6">
-        {Object.entries(grouped).map(([bundleId, list]) => {
-          const bundle = bundleById[bundleId as keyof typeof bundleById]
-          return (
-            <section key={bundleId}>
-              <h3 className="mb-2 font-heading text-sm font-bold" style={{ color: bundle.color }}>
+      {bundles.map((bundle) => {
+        const pct = bundleStrength(bundle.id, scan.present)
+        const list = instruments.filter(
+          (i) => i.bundle === bundle.id && visibleInstrument(i.minSize, scan.orgSize),
+        )
+        return (
+          <section key={bundle.id} className="rounded-xl border border-line bg-bg2/40 p-4">
+            <div className="mb-2 flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-2 font-heading text-sm font-bold text-ink">
+                <span className="size-2.5 rounded-full" style={{ backgroundColor: bundle.color }} />
                 {bundle.label}
-              </h3>
-              <ul className="space-y-2">
-                {list.map((inst) => {
-                  const on = scan.presentInstruments.includes(inst.id)
-                  return (
-                    <li key={inst.id}>
-                      <label
-                        className={`flex cursor-pointer gap-3 rounded-lg border px-3 py-3 transition ${
-                          on ? 'border-primary/50 bg-primary/5' : 'border-line bg-surface'
-                        }`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={on}
-                          onChange={() => scan.toggleInstrument(inst.id)}
-                          className="mt-1 size-4 accent-primary"
-                        />
-                        <span className="flex-1">
-                          <span className="font-semibold text-ink">
-                            {inst.name}
-                            {inst.legal && (
-                              <span className="ml-2 rounded bg-primary/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-primary">
-                                Wettelijk
-                              </span>
-                            )}
-                          </span>
-                          <span className="mt-0.5 block text-xs text-muted">{inst.description}</span>
-                        </span>
-                      </label>
-                    </li>
-                  )
-                })}
-              </ul>
-            </section>
-          )
-        })}
-      </div>
+              </div>
+              <div className="ml-auto flex min-w-[120px] flex-1 items-center gap-2 sm:max-w-[200px]">
+                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-bg">
+                  <div
+                    className="h-full rounded-full transition-all"
+                    style={{ width: `${pct}%`, backgroundColor: bundle.color }}
+                  />
+                </div>
+                <span className="text-xs tabular-nums text-muted">{pct}%</span>
+              </div>
+            </div>
+            <p className="mb-3 text-xs leading-relaxed text-muted">{bundle.description}</p>
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {list.map((inst) => {
+                const on = !!scan.present[inst.id]
+                return (
+                  <li key={inst.id}>
+                    <label
+                      className={`flex h-full cursor-pointer gap-2 rounded-lg border px-3 py-2.5 text-sm transition ${
+                        on ? 'border-primary/50 bg-primary/5' : 'border-line bg-surface'
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={on}
+                        onChange={() => scan.toggleInstrument(inst.id)}
+                        className="mt-0.5 accent-primary"
+                      />
+                      <span>
+                        <span className="font-semibold text-ink">{inst.label}</span>
+                        <span className="mt-0.5 block text-xs text-muted">{inst.description}</span>
+                      </span>
+                    </label>
+                  </li>
+                )
+              })}
+            </ul>
+          </section>
+        )
+      })}
 
-      <StepNav scan={scan} canNext />
+      <StepNav scan={scan} canNext nextLabel="Bekijk advies" />
     </div>
   )
 }
