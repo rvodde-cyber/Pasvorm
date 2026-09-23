@@ -1,0 +1,210 @@
+import type { BundleId } from './bundles'
+
+export interface Instrument {
+  id: string
+  name: string
+  bundle: BundleId
+  legal: boolean
+  description: string
+  reinforces: string[]
+}
+
+export const instruments: Instrument[] = [
+  {
+    id: 'arbeidsreglement',
+    name: 'Arbeidsreglement',
+    bundle: 'basis',
+    legal: true,
+    description: 'Wettelijk verplichte huisregels en arbeidsvoorwaarden.',
+    reinforces: ['verzuimprotocol', 'klachtenregeling'],
+  },
+  {
+    id: 'rie',
+    name: 'RI&E (risico-inventarisatie)',
+    bundle: 'basis',
+    legal: true,
+    description: 'Inventarisatie en evaluatie van arbeidsrisico’s.',
+    reinforces: ['verzuimprotocol', 'ao-beleid'],
+  },
+  {
+    id: 'loonadministratie',
+    name: 'Loonadministratie & payroll',
+    bundle: 'basis',
+    legal: true,
+    description: 'Correcte salarisverwerking en fiscale aangiftes.',
+    reinforces: ['beloningsbeleid', 'arbeidsreglement'],
+  },
+  {
+    id: 'verzuimprotocol',
+    name: 'Verzuimprotocol',
+    bundle: 'basis',
+    legal: true,
+    description: 'Wettelijk kader voor ziekteverzuim en re-integratie.',
+    reinforces: ['rie', 'leiderschap'],
+  },
+  {
+    id: 'ao-beleid',
+    name: 'Arbeidsomstandighedenbeleid',
+    bundle: 'basis',
+    legal: true,
+    description: 'Beleid voor veilige en gezonde arbeidsomstandigheden.',
+    reinforces: ['rie', 'gedragscode'],
+  },
+  {
+    id: 'functiehuis',
+    name: 'Functiehuis / functieprofielen',
+    bundle: 'ability',
+    legal: false,
+    description: 'Heldere rollen, competenties en verantwoordelijkheden.',
+    reinforces: ['selectie', 'performance', 'beloningsbeleid'],
+  },
+  {
+    id: 'selectie',
+    name: 'Selectie & werving',
+    bundle: 'ability',
+    legal: false,
+    description: 'Structuur voor passende instroom van talent.',
+    reinforces: ['inwerkprogramma', 'functiehuis'],
+  },
+  {
+    id: 'inwerkprogramma',
+    name: 'Inwerkprogramma',
+    bundle: 'ability',
+    legal: false,
+    description: 'Systematische onboarding van nieuwe medewerkers.',
+    reinforces: ['opleiding', 'teamoverleg'],
+  },
+  {
+    id: 'opleiding',
+    name: 'Opleiding & ontwikkeling',
+    bundle: 'ability',
+    legal: false,
+    description: 'Investering in vaardigheden en loopbaan.',
+    reinforces: ['performance', 'talent', 'leiderschap'],
+  },
+  {
+    id: 'performance',
+    name: 'Performance management',
+    bundle: 'ability',
+    legal: false,
+    description: 'Doelen, feedback en beoordelingscycli.',
+    reinforces: ['beloningsbeleid', 'functiehuis'],
+  },
+  {
+    id: 'talent',
+    name: 'Talentmanagement',
+    bundle: 'ability',
+    legal: false,
+    description: 'Identificeren en doorontwikkelen van sleutelposities.',
+    reinforces: ['opleiding', 'interne-mobiliteit'],
+  },
+  {
+    id: 'beloningsbeleid',
+    name: 'Beloningsbeleid',
+    bundle: 'motivation',
+    legal: false,
+    description: 'Salaris, doelbonussen en transparante criteria.',
+    reinforces: ['performance', 'secundair'],
+  },
+  {
+    id: 'secundair',
+    name: 'Secundaire arbeidsvoorwaarden',
+    bundle: 'motivation',
+    legal: false,
+    description: 'Pensioen, verlof, flexibiliteit en extras.',
+    reinforces: ['beloningsbeleid', 'werk-privé'],
+  },
+  {
+    id: 'werk-privé',
+    name: 'Werk-privébalans',
+    bundle: 'motivation',
+    legal: false,
+    description: 'Beleid rond werkdruk, verlof en duurzame inzetbaarheid.',
+    reinforces: ['verzuimprotocol', 'medewerkersonderzoek'],
+  },
+  {
+    id: 'medewerkersonderzoek',
+    name: 'Medewerkersonderzoek (MTO)',
+    bundle: 'motivation',
+    legal: false,
+    description: 'Periodieke meting van betrokkenheid en tevredenheid.',
+    reinforces: ['teamoverleg', 'leiderschap'],
+  },
+  {
+    id: 'teamoverleg',
+    name: 'Teamoverleg & communicatie',
+    bundle: 'opportunity',
+    legal: false,
+    description: 'Vaste momenten voor afstemming en feedback.',
+    reinforces: ['medezeggenschap', 'kennisdeling'],
+  },
+  {
+    id: 'medezeggenschap',
+    name: 'Medezeggenschap / OR',
+    bundle: 'opportunity',
+    legal: false,
+    description: 'Inspraak en formeel overleg met werknemers.',
+    reinforces: ['klachtenregeling', 'cultuur'],
+  },
+  {
+    id: 'interne-mobiliteit',
+    name: 'Interne mobiliteit',
+    bundle: 'opportunity',
+    legal: false,
+    description: 'Doorstroming tussen functies en afdelingen.',
+    reinforces: ['functiehuis', 'talent'],
+  },
+  {
+    id: 'kennisdeling',
+    name: 'Kennisdeling',
+    bundle: 'opportunity',
+    legal: false,
+    description: 'Systematisch delen van expertise binnen de organisatie.',
+    reinforces: ['opleiding', 'innovatie'],
+  },
+  {
+    id: 'gedragscode',
+    name: 'Gedragscode & integriteit',
+    bundle: 'ethiek',
+    legal: false,
+    description: 'Gedeelde normen voor integer en respectvol gedrag.',
+    reinforces: ['klachtenregeling', 'diversiteit'],
+  },
+  {
+    id: 'klachtenregeling',
+    name: 'Klachten- & meldregeling',
+    bundle: 'ethiek',
+    legal: false,
+    description: 'Veilige route voor signalen en conflicten.',
+    reinforces: ['gedragscode', 'medezeggenschap'],
+  },
+  {
+    id: 'diversiteit',
+    name: 'Diversiteit & inclusie',
+    bundle: 'ethiek',
+    legal: false,
+    description: 'Beleid voor gelijke kansen en inclusieve cultuur.',
+    reinforces: ['selectie', 'leiderschap'],
+  },
+  {
+    id: 'leiderschap',
+    name: 'Leiderschapsontwikkeling',
+    bundle: 'ethiek',
+    legal: false,
+    description: 'Ontwikkeling van leidinggevenden en rolmodellen.',
+    reinforces: ['opleiding', 'medewerkersonderzoek'],
+  },
+  {
+    id: 'cultuur',
+    name: 'Cultuur- & waardenprogramma',
+    bundle: 'ethiek',
+    legal: false,
+    description: 'Expliciete waarden en gedrag dat daarbij past.',
+    reinforces: ['gedragscode', 'teamoverleg'],
+  },
+]
+
+export const instrumentById = Object.fromEntries(instruments.map((i) => [i.id, i])) as Record<
+  string,
+  Instrument
+>

@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+@config '../tailwind.config.ts';
+
+@layer base {
+  html {
+    @apply font-body text-ink antialiased;
+  }
+
+  body {
+    @apply m-0 min-h-dvh bg-bg;
+  }
+
+  #root {
+    @apply min-h-dvh;
+  }
+}
