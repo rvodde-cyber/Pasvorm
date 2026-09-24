@@ -1,5 +1,24 @@
 # Pasvorm — STATUS
 
+## Sprint 1B — inhoud als data + regelmotor v1.0
+
+### Gedaan
+
+- **Zod** geïnstalleerd. `src/content/schema.ts` met schema's voor alle 10 JSON-bestanden; `src/content/index.ts` importeert, valideert (foutmelding met bestandsnaam) en exporteert getypte content. Verwijzingscontrole op `instrumentId`, `sourceId`, `phaseId` en quadrant-id's.
+- **Regelmotor** in `src/engine/`: `types.ts`, `phase.ts`, `culture.ts`, `rules.ts` (`evaluate`), pure functies zonder React. Logica R1–R7 volgens `rules.json` en sprintspecificatie (inclusief R1 onbeperkt, prioriteiten tot `maxPriorities`, sufficient zonder R2b, signalen in vaste volgorde).
+- **Tests** `tests/engine.test.ts`: alle 8 casussen uit `tests/fixtures/testcases.json` (fixture-cultuurprofiel → alle drie dimensies); plus schema- en verwijzingstests. `tests/recommendation.test.ts` ongewijzigd actief (oude engine tot sprint 2).
+- UI en `buildRecommendation` (`src/utils/recommendation.ts`) niet aangepast.
+
+### Afwijkingen
+
+- `tsconfig.app.json`: `resolveJsonModule` toegevoegd voor JSON-imports in `src/content`.
+- Prioriteit-`sourceIds` in het resultaat: union van regel-`sourceIds` en instrument-`sourceIds` (deduplicated); de UI gebruikt dit nog niet.
+- Referentie `docs/regie/referentie_regelmotor.py` niet in CI; testverwachtingen komen uit `tests/fixtures/testcases.json`.
+
+### Vragen aan regie
+
+- (openstaande vragen uit sprint 1A blijven hieronder in het document)
+
 ## Sprint 1A — fundament onder de bestaande app
 
 ### Gedaan
@@ -42,6 +61,7 @@
 - **react-router-dom** 7.18
 - **oxlint** (dev)
 - **Vitest** 5, **Testing Library**, **jsdom** (dev)
+- **Zod** (content-validatie)
 
 ## Mappenstructuur
 
@@ -52,10 +72,13 @@ pasvorm/
 ├── public/              Statische assets (prototype HTML, icons, images/)
 ├── src/components/      Landing, Scan, Modal
 ├── src/components/steps/  Scanstappen (intro t/m resultaat)
-├── src/data/            Bundels, instrumenten, fasen, CVF, toekomst, core-opties, voorbeeld
+├── src/content/         JSON-inhoud regie + schema + laden
+├── src/data/            Bundels, instrumenten, fasen, CVF, toekomst, core-opties, voorbeeld (UI, sprint 2)
+├── src/engine/          Regelmotor v1.0 (evaluate)
 ├── src/hooks/           useScanState (scantoestand + opslaan)
-├── src/utils/           Cultuurprofiel, aanbevelingsalgoritme, localStorage
-├── tests/               Vitest-tests
+├── src/utils/           Cultuurprofiel, aanbevelingsalgoritme (legacy), localStorage
+├── tests/               Vitest-tests + fixtures
+├── docs/regie/          Referentie regelmotor (niet in CI)
 └── (root)               vite/tailwind/tsconfig, vercel.json, README.md
 ```
 

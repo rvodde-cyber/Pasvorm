@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "stages": [
+    {
+      "value": 0,
+      "label": "Niet aanwezig",
+      "description": "Het instrument bestaat niet."
+    },
+    {
+      "value": 1,
+      "label": "Informeel",
+      "description": "Het gebeurt, maar is niet vastgelegd en hangt af van personen."
+    },
+    {
+      "value": 2,
+      "label": "Vastgelegd",
+      "description": "Het staat op papier, maar wordt niet overal of niet steeds toegepast."
+    },
+    {
+      "value": 3,
+      "label": "Structureel",
+      "description": "Het is vastgelegd én wordt overal consequent toegepast."
+    }
+  ],
+  "legalMinimumStage": 2
+}

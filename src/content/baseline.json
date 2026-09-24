@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "sourceIds": [
+    "BM88",
+    "CS04"
+  ],
+  "cumulative": true,
+  "overweightPhaseDistance": 2,
+  "requirements": {
+    "f1": {
+      "onboarding": 1,
+      "werkoverleg": 1,
+      "erkenning": 1
+    },
+    "f2": {
+      "functieprofielen": 2,
+      "werving_selectie": 2,
+      "onboarding": 2,
+      "gesprekscyclus": 2,
+      "werkoverleg": 2,
+      "gedragscode": 2
+    },
+    "f3": {
+      "opleiding": 2,
+      "beloning": 2,
+      "taakinrichting": 2,
+      "interne_communicatie": 2,
+      "vertrouwenspersoon": 2
+    },
+    "f4": {
+      "personeelsplanning": 2,
+      "doorgroeipaden": 2,
+      "vitaliteit": 2,
+      "moreel_beraad": 1,
+      "gesprekscyclus": 3
+    },
+    "f5": {
+      "teamontwikkeling": 2,
+      "moreel_beraad": 2,
+      "taakinrichting": 3
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "sourceIds": [
+    "GRE72",
+    "GRE98"
+  ],
+  "question": "Welke beschrijving lijkt het meest op hoe het bij u werkt? Kies daarna de beschrijving die er het dichtst bij komt.",
+  "phases": [
+    {
+      "id": "f1",
+      "order": 1,
+      "name": "Persoonlijke sturing",
+      "vignette": "De directeur weet van alles en beslist over bijna alles. Nieuwe mensen leren het werk door mee te lopen. Afspraken maakt u vooral mondeling."
+    },
+    {
+      "id": "f2",
+      "order": 2,
+      "name": "Richting geven",
+      "vignette": "Er zijn duidelijke functies en een vaste leidinggevende per afdeling. Opdrachten komen van boven. Plannen en controleren gaat volgens vaste routines."
+    },
+    {
+      "id": "f3",
+      "order": 3,
+      "name": "Delegeren",
+      "vignette": "Afdelings- of vestigingsleiders beslissen zelf binnen hun budget. Het management stuurt op resultaten, niet op elke handeling."
+    },
+    {
+      "id": "f4",
+      "order": 4,
+      "name": "Coördineren",
+      "vignette": "Beleid, systemen en procedures gelden voor de hele organisatie. Staffuncties bewaken de samenhang. Veel loopt via formele planning."
+    },
+    {
+      "id": "f5",
+      "order": 5,
+      "name": "Samenwerken",
+      "vignette": "Teams werken over afdelingsgrenzen heen aan projecten. Er zijn weinig vaste regels, wel gedeelde doelen en veel onderling overleg."
+    }
+  ],
+  "crisisQuestion": "Geef bij elke stelling aan of die voor uw organisatie geldt.",
+  "crisisAnswers": [
+    {
+      "id": "ja",
+      "label": "Ja"
+    },
+    {
+      "id": "deels",
+      "label": "Deels"
+    },
+    {
+      "id": "nee",
+      "label": "Nee"
+    }
+  ],
+  "crisisSignals": [
+    {
+      "id": "c1",
+      "phaseId": "f1",
+      "crisis": "leiderschapscrisis",
+      "statement": "De directeur kan niet meer alles zelf overzien."
+    },
+    {
+      "id": "c2",
+      "phaseId": "f2",
+      "crisis": "autonomiecrisis",
+      "statement": "Medewerkers en leidinggevenden willen meer ruimte om zelf te beslissen."
+    },
+    {
+      "id": "c3",
+      "phaseId": "f3",
+      "crisis": "controlecrisis",
+      "statement": "De top heeft het gevoel grip te verliezen op wat er gebeurt."
+    },
+    {
+      "id": "c4",
+      "phaseId": "f4",
+      "crisis": "bureaucratiecrisis",
+      "statement": "Procedures en systemen werken vertragend."
+    },
+    {
+      "id": "c5",
+      "phaseId": "f5",
+      "crisis": "groeigrens",
+      "statement": "We zoeken een nieuwe vorm van groei, intern of met partners."
+    }
+  ]
+}

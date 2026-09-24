@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "sourceIds": [
+    "CQ11",
+    "QC83"
+  ],
+  "question": "Verdeel 100 punten over deze vier beschrijvingen. Hoe beter een beschrijving past, hoe meer punten.",
+  "quadrants": [
+    {
+      "id": "clan",
+      "label": "Clan"
+    },
+    {
+      "id": "adhocracy",
+      "label": "Adhocratie"
+    },
+    {
+      "id": "market",
+      "label": "Markt"
+    },
+    {
+      "id": "hierarchy",
+      "label": "Hiërarchie"
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "d1",
+      "label": "Leiderschap",
+      "items": {
+        "clan": "Leidinggevenden zijn vooral coach en mentor.",
+        "adhocracy": "Leidinggevenden zijn ondernemend en durven risico te nemen.",
+        "market": "Leidinggevenden sturen scherp op doelen en resultaat.",
+        "hierarchy": "Leidinggevenden coördineren en zorgen dat alles soepel en volgens afspraak loopt."
+      }
+    },
+    {
+      "id": "d2",
+      "label": "Bindmiddel",
+      "items": {
+        "clan": "Wat ons bindt, is loyaliteit en onderling vertrouwen.",
+        "adhocracy": "Wat ons bindt, is vernieuwing en de wil om voorop te lopen.",
+        "market": "Wat ons bindt, is presteren en winnen.",
+        "hierarchy": "Wat ons bindt, zijn duidelijke regels en procedures."
+      }
+    },
+    {
+      "id": "d3",
+      "label": "Succes",
+      "items": {
+        "clan": "Succes is: betrokken mensen die zich ontwikkelen.",
+        "adhocracy": "Succes is: nieuwe producten, diensten of werkwijzen.",
+        "market": "Succes is: marktaandeel en de concurrent voorblijven.",
+        "hierarchy": "Succes is: betrouwbaar, efficiënt en foutloos werken."
+      }
+    }
+  ],
+  "pointsPerDimension": 100,
+  "flatProfileThreshold": 10,
+  "expectedByPhase": {
+    "f1": [
+      "adhocracy",
+      "clan"
+    ],
+    "f2": [
+      "hierarchy",
+      "market"
+    ],
+    "f3": [
+      "market",
+      "adhocracy"
+    ],
+    "f4": [
+      "hierarchy"
+    ],
+    "f5": [
+      "clan",
+      "adhocracy"
+    ]
+  },
+  "formSentences": {
+    "clan": "Richt dit in via dialoog en persoonlijk gesprek.",
+    "adhocracy": "Begin met een kleine pilot en leer onderweg.",
+    "market": "Koppel dit aan concrete doelen en meetbare resultaten.",
+    "hierarchy": "Leg dit vast in een heldere procedure met vaste verantwoordelijkheden."
+  }
+}

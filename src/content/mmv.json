@@ -1,0 +1,56 @@
+{
+  "version": "1.0",
+  "sourceIds": [
+    "MMV"
+  ],
+  "question": "In hoeverre herkent u dit in uw organisatie?",
+  "scale": {
+    "min": 1,
+    "max": 5,
+    "minLabel": "Helemaal niet",
+    "maxLabel": "Helemaal wel"
+  },
+  "lowThreshold": 2,
+  "items": [
+    {
+      "id": "m1",
+      "phase": "Zien",
+      "color": "zien",
+      "statement": "Een moreel lastige situatie wordt bij ons vroeg opgemerkt, bijvoorbeeld in werkoverleg of gesprekken.",
+      "instrumentId": "werkoverleg",
+      "note": "Neem in het werkoverleg een vaste, korte ronde op: \"Speelde er iets dat schuurde?\""
+    },
+    {
+      "id": "m2",
+      "phase": "Voelen",
+      "color": "voelen",
+      "statement": "Medewerkers kunnen zeggen dat iets niet goed voelt, ook als het binnen de regels valt.",
+      "instrumentId": "vertrouwenspersoon",
+      "note": "Maak de vertrouwenspersoon zichtbaar en laagdrempelig bereikbaar."
+    },
+    {
+      "id": "m3",
+      "phase": "Wegen",
+      "color": "wegen",
+      "statement": "Raakt een beslissing verschillende waarden, dan wegen we die samen af.",
+      "instrumentId": "moreel_beraad",
+      "note": "Oefen met moreel beraad aan de hand van een echte casus."
+    },
+    {
+      "id": "m4",
+      "phase": "Handelen",
+      "color": "handelen",
+      "statement": "Wie een dilemma meldt, weet bij wie hij terechtkan en ziet dat er iets mee gebeurt.",
+      "instrumentId": "meldcultuur",
+      "note": "Maak de meldroute bekend en koppel altijd terug wat er met een melding is gedaan."
+    },
+    {
+      "id": "m5",
+      "phase": "Volhouden",
+      "color": "volhouden",
+      "statement": "Een genomen morele beslissing houden we vast, ook onder tijdsdruk.",
+      "instrumentId": "gedragscode",
+      "note": "Verbind de gedragscode aan concrete voorbeelden uit het eigen werk en bespreek die jaarlijks."
+    }
+  ]
+}

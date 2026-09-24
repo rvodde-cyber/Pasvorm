@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "sourceIds": [
+    "MAC95",
+    "BOS05"
+  ],
+  "gapThreshold": 2,
+  "pairs": [
+    {
+      "id": "k1",
+      "a": "functieprofielen",
+      "b": "gesprekscyclus",
+      "reason": "Zonder heldere functie-eisen heeft een gesprek over functioneren geen maatstaf."
+    },
+    {
+      "id": "k2",
+      "a": "gesprekscyclus",
+      "b": "beloning",
+      "reason": "Belonen zonder gesprek over prestaties mist een eerlijke basis."
+    },
+    {
+      "id": "k3",
+      "a": "gesprekscyclus",
+      "b": "opleiding",
+      "reason": "Ontwikkelafspraken zonder opleidingsbeleid blijven intenties."
+    },
+    {
+      "id": "k4",
+      "a": "werving_selectie",
+      "b": "onboarding",
+      "reason": "Wie zorgvuldig werft maar slecht inwerkt, verliest nieuwe mensen snel."
+    },
+    {
+      "id": "k5",
+      "a": "gedragscode",
+      "b": "meldcultuur",
+      "reason": "Een gedragscode zonder veilige meldroute blijft papier."
+    },
+    {
+      "id": "k6",
+      "a": "werkoverleg",
+      "b": "interne_communicatie",
+      "reason": "Informatie die niet op de werkvloer besproken wordt, komt niet aan."
+    }
+  ]
+}

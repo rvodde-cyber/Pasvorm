@@ -1,0 +1,399 @@
+{
+  "version": "1.0",
+  "instruments": [
+    {
+      "id": "personeelsdossier",
+      "bundle": "basis",
+      "label": "Personeelsdossier en administratie",
+      "description": "Basisadministratie en bewaren van arbeidsrechtelijk verplichte documenten.",
+      "legal": true,
+      "minSize": 0,
+      "reinforces": [
+        "arbeidsovereenkomsten",
+        "verzuimbeleid"
+      ],
+      "sourceIds": [
+        "AVG"
+      ],
+      "firstStep": "Controleer per medewerker of de verplichte stukken aanwezig zijn, en bewaar ze beveiligd."
+    },
+    {
+      "id": "arbeidsovereenkomsten",
+      "bundle": "basis",
+      "label": "Arbeidsovereenkomsten en cao",
+      "description": "Actuele contracten, CAO-toepassing en naleving van arbeidsrecht.",
+      "legal": true,
+      "minSize": 0,
+      "reinforces": [
+        "personeelsdossier"
+      ],
+      "sourceIds": [
+        "BW7"
+      ],
+      "firstStep": "Loop alle contracten na op actualiteit en op de juiste cao."
+    },
+    {
+      "id": "verzuimbeleid",
+      "bundle": "basis",
+      "label": "Verzuim- en verlofbeleid, met arbodienst of bedrijfsarts",
+      "description": "Verzuimprotocol volgens de Wet verbetering poortwachter, met arbodienst of bedrijfsarts.",
+      "legal": true,
+      "minSize": 0,
+      "reinforces": [
+        "personeelsdossier",
+        "vitaliteit",
+        "onboarding"
+      ],
+      "sourceIds": [
+        "ARBO",
+        "WVP"
+      ],
+      "firstStep": "Sluit een contract met een arbodienst of bedrijfsarts en leg het verzuimprotocol vast."
+    },
+    {
+      "id": "avg_privacy",
+      "bundle": "basis",
+      "label": "AVG- en privacybeleid",
+      "description": "AVG-conforme personeelsadministratie, verwerkersovereenkomsten.",
+      "legal": true,
+      "minSize": 0,
+      "reinforces": [
+        "personeelsdossier"
+      ],
+      "sourceIds": [
+        "AVG"
+      ],
+      "firstStep": "Stel vast welke personeelsgegevens u bewaart, waarom en hoe lang."
+    },
+    {
+      "id": "rie",
+      "bundle": "basis",
+      "label": "Risico-inventarisatie en -evaluatie (RI&E)",
+      "description": "Wettelijk verplichte inventarisatie van arbeidsrisico's.",
+      "legal": true,
+      "minSize": 0,
+      "reinforces": [
+        "verzuimbeleid",
+        "vitaliteit"
+      ],
+      "sourceIds": [
+        "ARBO"
+      ],
+      "firstStep": "Laat een RI&E opstellen en toetsen, en maak een plan van aanpak."
+    },
+    {
+      "id": "medezeggenschap",
+      "bundle": "basis",
+      "label": "Ondernemingsraad",
+      "description": "Ondernemingsraad, verplicht vanaf 50 medewerkers.",
+      "legal": true,
+      "minSize": 50,
+      "reinforces": [
+        "werkoverleg",
+        "interne_communicatie"
+      ],
+      "sourceIds": [
+        "WOR"
+      ],
+      "firstStep": "Start de verkiezing van een ondernemingsraad."
+    },
+    {
+      "id": "functieprofielen",
+      "bundle": "ability",
+      "label": "Functieprofielen",
+      "description": "Heldere omschrijvingen van taken, bevoegdheden en vereiste competenties.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "werving_selectie",
+        "gesprekscyclus",
+        "beloning"
+      ],
+      "sourceIds": [
+        "APP00"
+      ],
+      "firstStep": "Beschrijf eerst de drie functies met de meeste medewerkers."
+    },
+    {
+      "id": "werving_selectie",
+      "bundle": "ability",
+      "label": "Werving- en selectiebeleid",
+      "description": "Gestructureerde aanpak voor het aantrekken van de juiste medewerkers.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "onboarding",
+        "functieprofielen",
+        "personeelsplanning"
+      ],
+      "sourceIds": [
+        "APP00"
+      ],
+      "firstStep": "Leg vast wie beslist over aanname, en werk met vaste selectiecriteria per functie."
+    },
+    {
+      "id": "onboarding",
+      "bundle": "ability",
+      "label": "Onboardingprogramma",
+      "description": "Vaste inwerkroute zodat nieuwe medewerkers snel effectief zijn.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "verzuimbeleid",
+        "gesprekscyclus",
+        "werving_selectie"
+      ],
+      "sourceIds": [
+        "APP00"
+      ],
+      "firstStep": "Maak een inwerkschema voor de eerste vier weken, met een vaste buddy."
+    },
+    {
+      "id": "opleiding",
+      "bundle": "ability",
+      "label": "Opleidings- en ontwikkelbeleid",
+      "description": "Structurele aanpak voor leren, vakmanschap en persoonlijke groei.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "doorgroeipaden",
+        "functieprofielen",
+        "gesprekscyclus"
+      ],
+      "sourceIds": [
+        "JIA12"
+      ],
+      "firstStep": "Stel een opleidingsbudget vast en maak afspraken over wie het mag besteden."
+    },
+    {
+      "id": "personeelsplanning",
+      "bundle": "ability",
+      "label": "Strategische personeelsplanning",
+      "description": "Inzicht in toekomstige personeelsbehoefte afgestemd op de strategie.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "werving_selectie"
+      ],
+      "sourceIds": [
+        "BM88"
+      ],
+      "firstStep": "Breng in kaart wie de komende twee jaar vertrekt en welke functies moeilijk te vervullen zijn."
+    },
+    {
+      "id": "gesprekscyclus",
+      "bundle": "motivation",
+      "label": "Gesprekscyclus (functioneren, beoordelen)",
+      "description": "Functionerings- en beoordelingsgesprekken, regelmatige feedback.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "beloning",
+        "doorgroeipaden",
+        "opleiding"
+      ],
+      "sourceIds": [
+        "JIA12"
+      ],
+      "firstStep": "Plan met iedere medewerker één gesprek per jaar, met een eenvoudig vast format."
+    },
+    {
+      "id": "beloning",
+      "bundle": "motivation",
+      "label": "Beloningsbeleid",
+      "description": "Eerlijk, transparant en met de organisatiestrategie verbonden beloningssysteem.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "functieprofielen",
+        "gesprekscyclus"
+      ],
+      "sourceIds": [
+        "JIA12"
+      ],
+      "firstStep": "Maak zichtbaar volgens welke criteria salarissen worden vastgesteld."
+    },
+    {
+      "id": "doorgroeipaden",
+      "bundle": "motivation",
+      "label": "Loopbaanpaden",
+      "description": "Interne groeimogelijkheden en carrièreperspectief voor medewerkers.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "opleiding",
+        "gesprekscyclus",
+        "erkenning"
+      ],
+      "sourceIds": [
+        "LS99"
+      ],
+      "firstStep": "Beschrijf voor de grootste functiegroep één mogelijke vervolgstap."
+    },
+    {
+      "id": "erkenning",
+      "bundle": "motivation",
+      "label": "Erkenning en waardering",
+      "description": "Zichtbaar maken en vieren van goed werk, buiten formele beloning.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "werkoverleg",
+        "gesprekscyclus"
+      ],
+      "sourceIds": [
+        "APP00"
+      ],
+      "firstStep": "Bespreek in elk werkoverleg kort wat goed ging en wie daarvoor zorgde."
+    },
+    {
+      "id": "vitaliteit",
+      "bundle": "motivation",
+      "label": "Vitaliteit en duurzame inzetbaarheid",
+      "description": "Aandacht voor gezondheid, duurzame inzetbaarheid en werkplezier.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "verzuimbeleid",
+        "erkenning"
+      ],
+      "sourceIds": [
+        "ARBO"
+      ],
+      "firstStep": "Vraag medewerkers wat hen helpt gezond door te werken, en kies één actie."
+    },
+    {
+      "id": "werkoverleg",
+      "bundle": "opportunity",
+      "label": "Werkoverleg op de werkvloer",
+      "description": "Vaste, korte overlegroutine op het werk, direct bij de medewerkers.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "medezeggenschap",
+        "interne_communicatie",
+        "verzuimbeleid",
+        "erkenning"
+      ],
+      "sourceIds": [
+        "APP00"
+      ],
+      "firstStep": "Plan een vast, kort overleg per team, elke week of elke twee weken."
+    },
+    {
+      "id": "taakinrichting",
+      "bundle": "opportunity",
+      "label": "Taakinrichting en autonomie",
+      "description": "Medewerkers krijgen ruimte om werk zelf in te richten en beslissingen te nemen.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "werkoverleg",
+        "gesprekscyclus"
+      ],
+      "sourceIds": [
+        "JIA12"
+      ],
+      "firstStep": "Kies per team één taak waarover het team zelf mag beslissen."
+    },
+    {
+      "id": "interne_communicatie",
+      "bundle": "opportunity",
+      "label": "Interne communicatie",
+      "description": "Structurele informatievoorziening aan medewerkers, ook meertalig of mobiel.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "werkoverleg",
+        "medezeggenschap"
+      ],
+      "sourceIds": [
+        "APP00"
+      ],
+      "firstStep": "Kies één vast kanaal voor belangrijk nieuws, ook bereikbaar zonder computer."
+    },
+    {
+      "id": "teamontwikkeling",
+      "bundle": "opportunity",
+      "label": "Teamontwikkeling",
+      "description": "Bewust bouwen aan samenwerking, teamdynamiek en gedeelde identiteit.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "werkoverleg",
+        "taakinrichting",
+        "opleiding"
+      ],
+      "sourceIds": [
+        "JIA12"
+      ],
+      "firstStep": "Houd per team een jaarlijkse sessie over samenwerking."
+    },
+    {
+      "id": "gedragscode",
+      "bundle": "ethiek",
+      "label": "Gedragscode",
+      "description": "Heldere normen voor integer handelen in de organisatie.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "moreel_beraad",
+        "vertrouwenspersoon",
+        "meldcultuur"
+      ],
+      "sourceIds": [
+        "MMV"
+      ],
+      "firstStep": "Stel met medewerkers vijf gedragsregels op, met voorbeelden uit het eigen werk."
+    },
+    {
+      "id": "moreel_beraad",
+      "bundle": "ethiek",
+      "label": "Moreel beraad en dilemmatraining",
+      "description": "Ruimte voor het bespreekbaar maken van morele spanningen op de werkvloer.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "gedragscode",
+        "werkoverleg"
+      ],
+      "sourceIds": [
+        "MMV"
+      ],
+      "firstStep": "Bespreek eens per kwartaal een echte casus volgens een vaste gespreksmethode."
+    },
+    {
+      "id": "vertrouwenspersoon",
+      "bundle": "ethiek",
+      "label": "Vertrouwenspersoon",
+      "description": "Aanspreekpunt voor medewerkers bij grensoverschrijdend gedrag.",
+      "legal": false,
+      "minSize": 0,
+      "reinforces": [
+        "gedragscode",
+        "meldcultuur"
+      ],
+      "sourceIds": [
+        "ARBO"
+      ],
+      "firstStep": "Wijs een interne of externe vertrouwenspersoon aan en maak die bekend."
+    },
+    {
+      "id": "meldcultuur",
+      "bundle": "ethiek",
+      "label": "Meldregeling en meldcultuur",
+      "description": "Interne meldregeling (verplicht vanaf 50 medewerkers) en een veilige cultuur om misstanden te melden.",
+      "legal": true,
+      "minSize": 50,
+      "reinforces": [
+        "gedragscode",
+        "vertrouwenspersoon",
+        "werkoverleg"
+      ],
+      "sourceIds": [
+        "WBK"
+      ],
+      "firstStep": "Stel een meldregeling op en maak bekend hoe en bij wie iemand kan melden."
+    }
+  ]
+}

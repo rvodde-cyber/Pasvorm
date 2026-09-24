@@ -1,0 +1,458 @@
+{
+  "version": "1.0",
+  "note": "Verwachte uitkomsten, berekend met de referentie-implementatie van de regie. Niet genoemde instrumenten = 0, niet genoemde MMV-items = 4.",
+  "cases": [
+    {
+      "id": "T1",
+      "name": "Taxibedrijf",
+      "input": {
+        "size": 400,
+        "phaseChoices": [
+          "f1",
+          "f2"
+        ],
+        "crisis": {
+          "c1": "ja"
+        },
+        "culture": {
+          "clan": 20,
+          "adhocracy": 10,
+          "market": 20,
+          "hierarchy": 50
+        },
+        "future": "gelijk",
+        "workforce": "uitvoerend",
+        "stages": {
+          "personeelsdossier": 3,
+          "arbeidsovereenkomsten": 3,
+          "verzuimbeleid": 3,
+          "avg_privacy": 3,
+          "rie": 3,
+          "medezeggenschap": 3
+        },
+        "mmv": {}
+      },
+      "expected": {
+        "priorities": [
+          {
+            "instrumentId": "meldcultuur",
+            "rule": "R1"
+          },
+          {
+            "instrumentId": "werkoverleg",
+            "rule": "R2"
+          },
+          {
+            "instrumentId": "onboarding",
+            "rule": "R2"
+          }
+        ],
+        "sufficient": false,
+        "temporary": [],
+        "external": [],
+        "form": "hierarchy",
+        "signals": [
+          "transition",
+          "phaseCultureTension"
+        ],
+        "ethicsNotes": []
+      }
+    },
+    {
+      "id": "T2",
+      "name": "Schoonmaakbedrijf",
+      "input": {
+        "size": 200,
+        "phaseChoices": [
+          "f2",
+          "f3"
+        ],
+        "crisis": {
+          "c2": "nee"
+        },
+        "culture": {
+          "clan": 15,
+          "adhocracy": 10,
+          "market": 25,
+          "hierarchy": 50
+        },
+        "future": "gelijk",
+        "workforce": "uitvoerend",
+        "stages": {
+          "personeelsdossier": 3,
+          "arbeidsovereenkomsten": 3,
+          "verzuimbeleid": 3,
+          "avg_privacy": 3,
+          "rie": 3,
+          "medezeggenschap": 3
+        },
+        "mmv": {}
+      },
+      "expected": {
+        "priorities": [
+          {
+            "instrumentId": "meldcultuur",
+            "rule": "R1"
+          },
+          {
+            "instrumentId": "werkoverleg",
+            "rule": "R2"
+          },
+          {
+            "instrumentId": "onboarding",
+            "rule": "R2"
+          }
+        ],
+        "sufficient": false,
+        "temporary": [],
+        "external": [],
+        "form": "hierarchy",
+        "signals": [],
+        "ethicsNotes": []
+      }
+    },
+    {
+      "id": "T3",
+      "name": "Start-up",
+      "input": {
+        "size": 12,
+        "phaseChoices": [
+          "f1",
+          "f2"
+        ],
+        "crisis": {
+          "c1": "nee"
+        },
+        "culture": {
+          "clan": 50,
+          "adhocracy": 30,
+          "market": 10,
+          "hierarchy": 10
+        },
+        "future": "groei",
+        "workforce": "schaars",
+        "stages": {
+          "personeelsdossier": 3,
+          "arbeidsovereenkomsten": 3,
+          "verzuimbeleid": 2,
+          "avg_privacy": 2,
+          "rie": 0,
+          "onboarding": 1,
+          "werkoverleg": 1,
+          "erkenning": 1,
+          "personeelsplanning": 3
+        },
+        "mmv": {}
+      },
+      "expected": {
+        "priorities": [
+          {
+            "instrumentId": "rie",
+            "rule": "R1"
+          }
+        ],
+        "sufficient": false,
+        "temporary": [
+          "werving_selectie",
+          "onboarding",
+          "functieprofielen"
+        ],
+        "external": [],
+        "form": "clan",
+        "signals": [
+          "overweight:personeelsplanning"
+        ],
+        "ethicsNotes": []
+      }
+    },
+    {
+      "id": "T4",
+      "name": "Toereikend",
+      "input": {
+        "size": 35,
+        "phaseChoices": [
+          "f2",
+          "f3"
+        ],
+        "crisis": {
+          "c2": "nee"
+        },
+        "culture": {
+          "clan": 10,
+          "adhocracy": 10,
+          "market": 30,
+          "hierarchy": 50
+        },
+        "future": "gelijk",
+        "workforce": "vakmanschap",
+        "stages": {
+          "personeelsdossier": 3,
+          "arbeidsovereenkomsten": 3,
+          "verzuimbeleid": 3,
+          "avg_privacy": 3,
+          "rie": 3,
+          "medezeggenschap": 3,
+          "onboarding": 2,
+          "werkoverleg": 2,
+          "erkenning": 1,
+          "functieprofielen": 2,
+          "werving_selectie": 2,
+          "gesprekscyclus": 2,
+          "gedragscode": 2,
+          "beloning": 1,
+          "opleiding": 1,
+          "meldcultuur": 1,
+          "interne_communicatie": 1
+        },
+        "mmv": {}
+      },
+      "expected": {
+        "priorities": [],
+        "sufficient": true,
+        "temporary": [],
+        "external": [],
+        "form": "hierarchy",
+        "signals": [],
+        "ethicsNotes": []
+      }
+    },
+    {
+      "id": "T5",
+      "name": "Coherentiehiaat",
+      "input": {
+        "size": 35,
+        "phaseChoices": [
+          "f2",
+          "f3"
+        ],
+        "crisis": {
+          "c2": "nee"
+        },
+        "culture": {
+          "clan": 10,
+          "adhocracy": 10,
+          "market": 30,
+          "hierarchy": 50
+        },
+        "future": "gelijk",
+        "workforce": "vakmanschap",
+        "stages": {
+          "personeelsdossier": 3,
+          "arbeidsovereenkomsten": 3,
+          "verzuimbeleid": 3,
+          "avg_privacy": 3,
+          "rie": 3,
+          "medezeggenschap": 3,
+          "onboarding": 2,
+          "werkoverleg": 2,
+          "erkenning": 1,
+          "functieprofielen": 2,
+          "werving_selectie": 2,
+          "gesprekscyclus": 2,
+          "gedragscode": 2,
+          "beloning": 1,
+          "opleiding": 0,
+          "meldcultuur": 1,
+          "interne_communicatie": 1
+        },
+        "mmv": {}
+      },
+      "expected": {
+        "priorities": [
+          {
+            "instrumentId": "opleiding",
+            "rule": "R5"
+          }
+        ],
+        "sufficient": false,
+        "temporary": [],
+        "external": [],
+        "form": "hierarchy",
+        "signals": [],
+        "ethicsNotes": []
+      }
+    },
+    {
+      "id": "T6",
+      "name": "Afbouw",
+      "input": {
+        "size": 120,
+        "phaseChoices": [
+          "f4",
+          "f5"
+        ],
+        "crisis": {
+          "c4": "nee"
+        },
+        "culture": {
+          "clan": 10,
+          "adhocracy": 10,
+          "market": 20,
+          "hierarchy": 60
+        },
+        "future": "afbouw",
+        "workforce": "gemengd",
+        "stages": {
+          "personeelsdossier": 3,
+          "arbeidsovereenkomsten": 3,
+          "verzuimbeleid": 3,
+          "avg_privacy": 3,
+          "rie": 3,
+          "medezeggenschap": 3,
+          "functieprofielen": 3,
+          "werving_selectie": 3,
+          "onboarding": 3,
+          "opleiding": 3,
+          "personeelsplanning": 3,
+          "gesprekscyclus": 3,
+          "beloning": 3,
+          "doorgroeipaden": 3,
+          "erkenning": 3,
+          "vitaliteit": 3,
+          "werkoverleg": 3,
+          "taakinrichting": 3,
+          "interne_communicatie": 3,
+          "teamontwikkeling": 3,
+          "gedragscode": 3,
+          "moreel_beraad": 3,
+          "vertrouwenspersoon": 3,
+          "meldcultuur": 3
+        },
+        "mmv": {}
+      },
+      "expected": {
+        "priorities": [],
+        "sufficient": true,
+        "temporary": [],
+        "external": [
+          "Van-werk-naar-werkbegeleiding (extern of interim)"
+        ],
+        "form": "hierarchy",
+        "signals": [],
+        "ethicsNotes": []
+      }
+    },
+    {
+      "id": "T7",
+      "name": "Papier zonder praktijk",
+      "input": {
+        "size": 35,
+        "phaseChoices": [
+          "f2",
+          "f3"
+        ],
+        "crisis": {
+          "c2": "nee"
+        },
+        "culture": {
+          "clan": 10,
+          "adhocracy": 10,
+          "market": 30,
+          "hierarchy": 50
+        },
+        "future": "gelijk",
+        "workforce": "vakmanschap",
+        "stages": {
+          "personeelsdossier": 3,
+          "arbeidsovereenkomsten": 3,
+          "verzuimbeleid": 3,
+          "avg_privacy": 3,
+          "rie": 3,
+          "medezeggenschap": 3,
+          "onboarding": 2,
+          "werkoverleg": 2,
+          "erkenning": 1,
+          "functieprofielen": 2,
+          "werving_selectie": 2,
+          "gesprekscyclus": 2,
+          "gedragscode": 2,
+          "beloning": 1,
+          "opleiding": 1,
+          "meldcultuur": 2,
+          "interne_communicatie": 1
+        },
+        "mmv": {
+          "m4": 2
+        }
+      },
+      "expected": {
+        "priorities": [],
+        "sufficient": true,
+        "temporary": [],
+        "external": [],
+        "form": "hierarchy",
+        "signals": [
+          "paperNoPractice:meldcultuur"
+        ],
+        "ethicsNotes": [
+          "meldcultuur"
+        ]
+      }
+    },
+    {
+      "id": "T8",
+      "name": "Tegenstrijdig en vlak",
+      "input": {
+        "size": 60,
+        "phaseChoices": [
+          "f1",
+          "f4"
+        ],
+        "crisis": {
+          "c1": "deels"
+        },
+        "culture": {
+          "clan": 26,
+          "adhocracy": 25,
+          "market": 25,
+          "hierarchy": 24
+        },
+        "future": "gelijk",
+        "workforce": "uitvoerend",
+        "stages": {},
+        "mmv": {}
+      },
+      "expected": {
+        "priorities": [
+          {
+            "instrumentId": "personeelsdossier",
+            "rule": "R1"
+          },
+          {
+            "instrumentId": "arbeidsovereenkomsten",
+            "rule": "R1"
+          },
+          {
+            "instrumentId": "verzuimbeleid",
+            "rule": "R1"
+          },
+          {
+            "instrumentId": "avg_privacy",
+            "rule": "R1"
+          },
+          {
+            "instrumentId": "rie",
+            "rule": "R1"
+          },
+          {
+            "instrumentId": "medezeggenschap",
+            "rule": "R1"
+          },
+          {
+            "instrumentId": "meldcultuur",
+            "rule": "R1"
+          }
+        ],
+        "sufficient": false,
+        "temporary": [],
+        "external": [],
+        "form": null,
+        "signals": [
+          "inconsistentPhase",
+          "flatProfile"
+        ],
+        "ethicsNotes": []
+      }
+    }
+  ]
+}

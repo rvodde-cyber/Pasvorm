@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "maxPriorities": 3,
+  "order": [
+    "R1",
+    "R5",
+    "R2",
+    "R2b"
+  ],
+  "rules": [
+    {
+      "id": "R1",
+      "name": "Wettelijk",
+      "kind": "wettelijk",
+      "horizon": "binnen 3 maanden",
+      "sourceIds": [],
+      "why": "Dit instrument is wettelijk verplicht voor uw organisatie en staat nog niet op papier."
+    },
+    {
+      "id": "R5",
+      "name": "Coherentie",
+      "kind": "coherentie",
+      "horizon": "3 tot 6 maanden",
+      "sourceIds": [
+        "MAC95",
+        "BOS05"
+      ],
+      "why": "Dit instrument loopt achter op het instrument waarmee het samenwerkt: {reason}"
+    },
+    {
+      "id": "R2",
+      "name": "Structureel",
+      "kind": "structureel",
+      "horizon": "6 tot 12 maanden",
+      "sourceIds": [
+        "BM88",
+        "CS04"
+      ],
+      "why": "Bij de groeifase {phase} hoort dit instrument minimaal op niveau '{expected}'; nu is het '{current}'."
+    },
+    {
+      "id": "R2b",
+      "name": "Overgang",
+      "kind": "voorbereiden",
+      "horizon": "binnen 12 maanden",
+      "sourceIds": [
+        "GRE98"
+      ],
+      "why": "Uw organisatie is in overgang naar de fase {nextPhase}; daar hoort dit instrument bij."
+    },
+    {
+      "id": "R3",
+      "name": "Tijdelijk",
+      "kind": "tijdelijk",
+      "horizon": "zolang het scenario loopt",
+      "sourceIds": [
+        "SCH95"
+      ],
+      "why": "Bij het scenario '{scenario}' is dit instrument tijdelijk extra nodig. Zet het tijdelijk in of huur het in."
+    },
+    {
+      "id": "R4",
+      "name": "Personeelsgroep",
+      "kind": "volgorde",
+      "sourceIds": [
+        "LS99"
+      ]
+    },
+    {
+      "id": "R6",
+      "name": "Vorm",
+      "kind": "vorm",
+      "sourceIds": [
+        "CQ11"
+      ]
+    },
+    {
+      "id": "R7",
+      "name": "Ethiek",
+      "kind": "kanttekening",
+      "sourceIds": [
+        "MMV"
+      ]
+    }
+  ],
+  "texts": {
+    "sufficient": "Uw HR-instrumentarium past bij de fase en de cultuur van uw organisatie. U hoeft niets structureel toe te voegen.",
+    "disclaimer": "Indicatief, evidence-informed instrument in validatie. Geen vervanging van professioneel HR- of arbeidsrechtelijk advies."
+  },
+  "signals": {
+    "transition": "Uw organisatie is in overgang van {phase} naar {nextPhase}.",
+    "inconsistentPhase": "Uw twee keuzes voor de groeifase liggen ver uit elkaar ({first} en {second}). Laat de scan ook door een tweede persoon invullen. Het advies gaat uit van uw eerste keus.",
+    "phaseCultureTension": "De gemeten cultuur ({culture}) is niet wat bij de fase {phase} te verwachten is. Dat is geen fout, wel een goed gespreksonderwerp.",
+    "flatProfile": "Er is geen uitgesproken cultuur; de cultuur is mogelijk in beweging of intern verdeeld.",
+    "overweight": "{instrument} is mogelijk zwaarder ingericht dan nodig voor deze fase.",
+    "paperNoPractice": "{instrument} bestaat, maar werkt in de praktijk nog niet als morele steun."
+  }
+}

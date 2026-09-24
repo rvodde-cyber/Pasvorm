@@ -1,0 +1,116 @@
+{
+  "version": "1.0",
+  "sources": [
+    {
+      "id": "APP00",
+      "type": "wetenschap",
+      "apa": "Appelbaum, E., Bailey, T., Berg, P., & Kalleberg, A. L. (2000). *Manufacturing advantage: Why high-performance work systems pay off*. Cornell University Press."
+    },
+    {
+      "id": "BM88",
+      "type": "wetenschap",
+      "apa": "Baird, L., & Meshoulam, I. (1988). Managing two fits of strategic human resource management. *Academy of Management Review, 13*(1), 116–128. https://doi.org/10.5465/amr.1988.4306802"
+    },
+    {
+      "id": "BOS05",
+      "type": "wetenschap",
+      "apa": "Boselie, P., Dietz, G., & Boon, C. (2005). Commonalities and contradictions in HRM and performance research. *Human Resource Management Journal, 15*(3), 67–94. https://doi.org/10.1111/j.1748-8583.2005.tb00154.x"
+    },
+    {
+      "id": "CQ11",
+      "type": "wetenschap",
+      "apa": "Cameron, K. S., & Quinn, R. E. (2011). *Diagnosing and changing organizational culture: Based on the competing values framework* (3rd ed.). Jossey-Bass."
+    },
+    {
+      "id": "CS04",
+      "type": "wetenschap",
+      "apa": "Cardon, M. S., & Stevens, C. E. (2004). Managing human resources in small organizations: What do we know? *Human Resource Management Review, 14*(3), 295–323. https://doi.org/10.1016/j.hrmr.2004.06.001"
+    },
+    {
+      "id": "GRE72",
+      "type": "wetenschap",
+      "apa": "Greiner, L. E. (1972). Evolution and revolution as organizations grow. *Harvard Business Review, 50*(4), 37–46."
+    },
+    {
+      "id": "GRE98",
+      "type": "wetenschap",
+      "apa": "Greiner, L. E. (1998). Evolution and revolution as organizations grow. *Harvard Business Review, 76*(3), 55–67."
+    },
+    {
+      "id": "JIA12",
+      "type": "wetenschap",
+      "apa": "Jiang, K., Lepak, D. P., Hu, J., & Baer, J. C. (2012). How does human resource management influence organizational outcomes? A meta-analytic investigation of mediating mechanisms. *Academy of Management Journal, 55*(6), 1264–1294. https://doi.org/10.5465/amj.2011.0088"
+    },
+    {
+      "id": "LS99",
+      "type": "wetenschap",
+      "apa": "Lepak, D. P., & Snell, S. A. (1999). The human resource architecture: Toward a theory of human capital allocation and development. *Academy of Management Review, 24*(1), 31–48. https://doi.org/10.5465/amr.1999.1580439"
+    },
+    {
+      "id": "MAC95",
+      "type": "wetenschap",
+      "apa": "MacDuffie, J. P. (1995). Human resource bundles and manufacturing performance: Organizational logic and flexible production systems in the world auto industry. *Industrial and Labor Relations Review, 48*(2), 197–221. https://doi.org/10.1177/001979399504800201"
+    },
+    {
+      "id": "QC83",
+      "type": "wetenschap",
+      "apa": "Quinn, R. E., & Cameron, K. (1983). Organizational life cycles and shifting criteria of effectiveness: Some preliminary evidence. *Management Science, 29*(1), 33–51. https://doi.org/10.1287/mnsc.29.1.33"
+    },
+    {
+      "id": "SCH95",
+      "type": "wetenschap",
+      "apa": "Schoemaker, P. J. H. (1995). Scenario planning: A tool for strategic thinking. *Sloan Management Review, 36*(2), 25–40."
+    },
+    {
+      "id": "VA04",
+      "type": "wetenschap",
+      "apa": "Van Aken, J. E. (2004). Management research based on the paradigm of the design sciences: The quest for field-tested and grounded technological rules. *Journal of Management Studies, 41*(2), 219–246. https://doi.org/10.1111/j.1467-6486.2004.00430.x"
+    },
+    {
+      "id": "VDH05",
+      "type": "wetenschap",
+      "apa": "Van der Heijden, K. (2005). *Scenarios: The art of strategic conversation* (2nd ed.). Wiley."
+    },
+    {
+      "id": "MMV",
+      "type": "model",
+      "apa": "Lectoraat Ethisch Werken. (z.d.). *Model Moreel Vakmanschap: Zien, Voelen, Wegen, Handelen, Volhouden*. Fontys Hogeschool HRM en Psychologie.",
+      "todo": "Auteursvermelding door Richard vast te stellen"
+    },
+    {
+      "id": "AVG",
+      "type": "wet",
+      "apa": "Verordening (EU) 2016/679 van het Europees Parlement en de Raad van 27 april 2016 (Algemene verordening gegevensbescherming). (2016). *Publicatieblad van de Europese Unie, L 119*, 1–88."
+    },
+    {
+      "id": "ARBO",
+      "type": "wet",
+      "apa": "Arbeidsomstandighedenwet. (1998).",
+      "todo": "Vindplaats op wetten.overheid.nl aanvullen"
+    },
+    {
+      "id": "BW7",
+      "type": "wet",
+      "apa": "Burgerlijk Wetboek Boek 7, titel 10: De arbeidsovereenkomst.",
+      "todo": "Vindplaats aanvullen"
+    },
+    {
+      "id": "WVP",
+      "type": "wet",
+      "apa": "Wet verbetering poortwachter. (2001).",
+      "todo": "Vindplaats aanvullen; zie ook BW 7:629 en 7:658a"
+    },
+    {
+      "id": "WOR",
+      "type": "wet",
+      "apa": "Wet op de ondernemingsraden. (1971).",
+      "todo": "Vindplaats aanvullen"
+    },
+    {
+      "id": "WBK",
+      "type": "wet",
+      "apa": "Wet bescherming klokkenluiders. (2023).",
+      "todo": "Vindplaats aanvullen"
+    }
+  ]
+}

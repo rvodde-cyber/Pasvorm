@@ -1,0 +1,104 @@
+{
+  "version": "1.0",
+  "future": {
+    "sourceIds": [
+      "SCH95",
+      "VDH05"
+    ],
+    "question": "Welke richting heeft de leiding voor de komende 2 tot 3 jaar voor ogen?",
+    "options": [
+      {
+        "id": "groei",
+        "title": "Groei",
+        "description": "Uitbreiding van activiteiten, omzet en/of personeelsbestand.",
+        "temporarySet": [
+          "werving_selectie",
+          "onboarding",
+          "personeelsplanning",
+          "functieprofielen"
+        ],
+        "external": []
+      },
+      {
+        "id": "gelijk",
+        "title": "Gelijk blijven",
+        "description": "Consolidatie van de huidige omvang en werkwijze.",
+        "temporarySet": [],
+        "external": []
+      },
+      {
+        "id": "afbouw",
+        "title": "Afbouw",
+        "description": "Krimp van activiteiten en/of personeelsbestand.",
+        "temporarySet": [
+          "interne_communicatie",
+          "medezeggenschap",
+          "vertrouwenspersoon"
+        ],
+        "external": [
+          "Van-werk-naar-werkbegeleiding (extern of interim)"
+        ]
+      },
+      {
+        "id": "anders",
+        "title": "Iets anders",
+        "description": "Een fundamenteel andere richting.",
+        "hasNote": true,
+        "temporarySet": [],
+        "external": [],
+        "reportNote": "U koos voor een andere richting. Bespreek uw toelichting met een HR-adviseur om te bepalen welke tijdelijke inzet nodig is."
+      }
+    ],
+    "maxTemporary": 3
+  },
+  "workforce": {
+    "sourceIds": [
+      "LS99"
+    ],
+    "question": "Hoe typeert u de grootste groep medewerkers?",
+    "options": [
+      {
+        "id": "uitvoerend",
+        "title": "Overwegend uitvoerend en praktisch geschoold",
+        "description": "Relatief goed vervangbaar op de arbeidsmarkt.",
+        "priority": [
+          "werving_selectie",
+          "onboarding",
+          "werkoverleg",
+          "interne_communicatie",
+          "verzuimbeleid"
+        ]
+      },
+      {
+        "id": "vakmanschap",
+        "title": "Overwegend middelbaar geschoold vakmanschap",
+        "description": "Redelijk vervangbaar, met opleidingstijd.",
+        "priority": [
+          "onboarding",
+          "opleiding",
+          "gesprekscyclus",
+          "doorgroeipaden"
+        ]
+      },
+      {
+        "id": "schaars",
+        "title": "Overwegend hoogopgeleid en schaars",
+        "description": "Moeilijk vervangbaar, bijvoorbeeld specialisten, technici of juristen.",
+        "priority": [
+          "opleiding",
+          "doorgroeipaden",
+          "beloning",
+          "erkenning",
+          "vitaliteit"
+        ]
+      },
+      {
+        "id": "gemengd",
+        "title": "Sterk gemengd",
+        "description": "Geen duidelijk dominant type.",
+        "priority": [],
+        "reportNote": "Uw personeel is sterk gemengd. Stem HR-instrumenten af per groep medewerkers in plaats van één aanpak voor iedereen."
+      }
+    ]
+  }
+}
