@@ -25,16 +25,9 @@ export function cultureProfile(input: ScanInput): Record<QuadrantId, number> {
   return profile
 }
 
-export function dominantQuadrant(profile: Record<QuadrantId, number>): QuadrantId {
-  let best: QuadrantId = 'clan'
-  let bestV = -Infinity
-  for (const q of QUADRANT_ORDER) {
-    if (profile[q] > bestV) {
-      bestV = profile[q]
-      best = q
-    }
-  }
-  return best
+export function dominantQuadrants(profile: Record<QuadrantId, number>): QuadrantId[] {
+  const mx = Math.max(...QUADRANT_ORDER.map((q) => profile[q]))
+  return QUADRANT_ORDER.filter((q) => profile[q] === mx)
 }
 
 export function evaluateCulture(input: ScanInput, dominantPhase: PhaseId): CultureOutcome {
@@ -43,11 +36,12 @@ export function evaluateCulture(input: ScanInput, dominantPhase: PhaseId): Cultu
   const mx = Math.max(...values)
   const mn = Math.min(...values)
   const flat = mx - mn < content.culture.flatProfileThreshold
-  const dominant = dominantQuadrant(profile)
+  const dominants = dominantQuadrants(profile)
+  const dominant = dominants[0]
   const expected = content.culture.expectedByPhase[dominantPhase] ?? []
-  const tension = !flat && !expected.includes(dominant)
+  const tension = !flat && !dominants.some((q) => expected.includes(q))
 
-  return { profile, dominant, flat, tension }
+  return { profile, dominant, dominants, flat, tension }
 }
 
 export function quadrantLabel(id: QuadrantId): string {

@@ -98,9 +98,6 @@ export function Landing() {
             className="pointer-events-none absolute inset-0 bg-gradient-to-r from-bg via-transparent to-bg/50"
             aria-hidden
           />
-          <p className="pointer-events-none absolute bottom-3.5 right-4 text-[11px] text-white/50">
-            Illustratie MKB-organisatie
-          </p>
         </aside>
       </main>
 

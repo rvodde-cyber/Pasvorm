@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import type { ScanState } from '../../hooks/useScanState'
 
 export function StepNav({
@@ -35,10 +35,53 @@ export function StepNav({
 }
 
 export function ClearAnswersButton({ onClear }: { onClear: () => void }) {
+  const [confirming, setConfirming] = useState(false)
+  const cancelRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (!confirming) return
+    cancelRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setConfirming(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [confirming])
+
+  if (confirming) {
+    return (
+      <div
+        role="group"
+        aria-label="Bevestiging wissen"
+        className="flex flex-wrap items-center gap-2 rounded-lg border border-line bg-bg2 px-3 py-2"
+      >
+        <p className="text-sm text-muted">Weet u het zeker? Al uw antwoorden worden gewist.</p>
+        <button
+          ref={cancelRef}
+          type="button"
+          onClick={() => setConfirming(false)}
+          className="rounded-lg border border-line px-3 py-1.5 text-sm font-semibold text-ink hover:bg-surface"
+        >
+          Annuleren
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setConfirming(false)
+            onClear()
+          }}
+          className="rounded-lg bg-accent px-3 py-1.5 text-sm font-semibold text-accent-ink hover:brightness-110"
+        >
+          Ja, wissen
+        </button>
+      </div>
+    )
+  }
+
   return (
     <button
       type="button"
-      onClick={onClear}
+      onClick={() => setConfirming(true)}
       className="rounded-lg border border-line px-4 py-2 text-sm font-semibold text-muted hover:bg-surface hover:text-ink"
     >
       Wis mijn antwoorden

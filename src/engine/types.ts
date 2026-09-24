@@ -36,6 +36,7 @@ export interface PhaseOutcome {
 export interface CultureOutcome {
   profile: Record<QuadrantId, number>
   dominant: QuadrantId
+  dominants: QuadrantId[]
   flat: boolean
   tension: boolean
 }

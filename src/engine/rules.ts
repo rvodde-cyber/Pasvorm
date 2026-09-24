@@ -199,7 +199,7 @@ export function evaluate(input: ScanInput): EvaluateResult {
 
   const sufficient = r1.length === 0 && r5.length === 0 && r2.length === 0
 
-  const form = culture.flat ? null : culture.dominant
+  const form = culture.flat ? null : culture.dominants[0]
 
   const pairReasonByInst = new Map<InstrumentId, string>()
   for (const pair of content.pairs.pairs) {
@@ -211,7 +211,9 @@ export function evaluate(input: ScanInput): EvaluateResult {
     }
   }
 
-  const nextPhaseId = phaseIdByOrder(phaseOrderOf(phase.dominant) + 1)
+  const nextPhaseId = phase.transition
+    ? phaseIdByOrder(phaseOrderOf(phase.dominant) + 1)
+    : phase.dominant
   const priorities: PriorityItem[] = priorityPairs.map(([instId, rule]) => {
     const need = req[instId] ?? content.baseline.requirements[nextPhaseId]?.[instId]
     const vars: Record<string, string> = {

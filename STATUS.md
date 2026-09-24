@@ -1,5 +1,19 @@
 # Pasvorm — STATUS
 
+## Sprint 1B — herstel na regiecontrole + afronding 1A
+
+### Gedaan (herstel)
+
+- **Fase f5:** `nextPhaseId` alleen via `phaseIdByOrder` bij `phase.transition`; anders dominante fase (geen crash meer bij f5 als eerste keus).
+- **Cultuur gelijke stand:** `dominants[]` naast `dominant`; `tension` alleen als geen dominant in `expectedByPhase` staat; `form` = `dominants[0]`.
+- **Regressietests** in `tests/engine.test.ts` (f5/f4, f5/f5, gelijke stand f3, tension f1).
+- **Afronding 1A:** hero-bijschrift verwijderd; favicon `/favicon.svg`; bevestiging bij "Wis mijn antwoorden" (inline, focus Annuleren, Escape annuleert).
+
+### Vragen aan regie
+
+- Waar moet `rapport-meetlint.webp` gebruikt worden?
+- Horen de originele jpg's in `/_bron` in Git (samen ca. 2,4 MB), of moet `/_bron` in `.gitignore`?
+
 ## Sprint 1B — inhoud als data + regelmotor v1.0
 
 ### Gedaan
@@ -15,10 +29,6 @@
 - Prioriteit-`sourceIds` in het resultaat: union van regel-`sourceIds` en instrument-`sourceIds` (deduplicated); de UI gebruikt dit nog niet.
 - Referentie `docs/regie/referentie_regelmotor.py` niet in CI; testverwachtingen komen uit `tests/fixtures/testcases.json`.
 
-### Vragen aan regie
-
-- (openstaande vragen uit sprint 1A blijven hieronder in het document)
-
 ## Sprint 1A — fundament onder de bestaande app
 
 ### Gedaan
@@ -33,7 +43,7 @@
   - d. 30 mw zonder OR → OR niet geëist; ter controle van de drempel: bij 50 mw wél `legal`, OR.
   - e. Alle 24 instrumenten → `compleet`.
 - Opslaan: scantoestand in `localStorage` onder `pasvorm:v1` (`src/utils/storage.ts`, alle toegang in try/catch). Bij laden wordt elk veld gecontroleerd; ongeldige data valt terug op een lege scan. Na verversen gaat de scan verder op dezelfde stap. Een lege scan verwijdert de sleutel.
-- Knop "Wis mijn antwoorden" op de intro- en resultaatstap; maakt alle antwoorden en de opslag leeg en gaat naar de intro.
+- Knop "Wis mijn antwoorden" op de intro- en resultaatstap, met bevestiging (zie herstel sprint 1B).
 - Beelden: `public/images/hero-meetlint.webp` (1600×1244, 188 kB) en `public/images/rapport-meetlint.webp` (1600×1244, 198 kB). Hero op de landingspagina met alt-tekst. Originele jpg's verplaatst naar `/_bron` (buiten `public`, dus niet in de build).
 - Opgeruimd: `src/assets/react.svg`, `src/assets/vite.svg`, `src/assets/hero.png`, `public/pasvorm-foto.jpg`.
 - CI: `.github/workflows/ci.yml` — bij elke push lint, typecheck, test en build op Node 22.
@@ -45,14 +55,6 @@
 - "Nieuwe scan starten" op de resultaatstap wist nu ook de opslag (zelfde `reset` als "Wis mijn antwoorden").
 - De lege map `src/assets` kon lokaal niet verwijderd worden (geen rechten, waarschijnlijk OneDrive). Git bewaart geen lege mappen; in de repository bestaat hij niet.
 - `rapport-meetlint.webp` is aangemaakt maar nog nergens gebruikt; er is geen plek voor opgegeven.
-
-### Vragen aan regie
-
-- Onder de hero staat nog het onderschrift "Illustratie MKB-organisatie", terwijl de foto nu een meetlint toont. Tekst aanpassen of weghalen?
-- `index.html` verwijst naar favicon `/vite.svg`, die niet bestaat (ook vóór deze sprint niet). `public/favicon.svg` bestaat wel. Overschakelen?
-- Waar moet `rapport-meetlint.webp` gebruikt worden?
-- Moet "Wis mijn antwoorden" eerst om bevestiging vragen?
-- Horen de originele jpg's in `/_bron` in Git (samen ca. 2,4 MB), of moet `/_bron` in `.gitignore`?
 
 ## Stack
 
