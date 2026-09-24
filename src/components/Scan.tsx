@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { content } from '../content'
 import { useScanSession } from '../hooks/useScanSession'
+import { focusFirstInvalid, isStepValid } from '../scan/validation'
 import { ProgressTape } from './ProgressTape'
 import { ClearAnswersButton, ScanStepNav } from './scan/ScanNav'
 import { StepCultuur } from './scan/steps/StepCultuur'
@@ -16,7 +17,9 @@ import { StepToekomst } from './scan/steps/StepToekomst'
 export function Scan() {
   const scan = useScanSession()
   const titleRef = useRef<HTMLHeadingElement>(null)
+  const [invalidAttemptStep, setInvalidAttemptStep] = useState<number | null>(null)
   const step = scan.session.step
+  const showError = invalidAttemptStep === step && !isStepValid(step, scan.session)
   const isResult = step >= 7
   const stepCfg = isResult ? null : content.ui.steps[step]
   const tapeStep = Math.min(step, 6)
@@ -25,9 +28,19 @@ export function Scan() {
     titleRef.current?.focus()
   }, [step])
 
-  const onNext = () => {
+  const advance = () => {
     if (step === 6) scan.goStep(7)
     else scan.goNext()
+  }
+
+  const handleNext = () => {
+    if (!isStepValid(step, scan.session)) {
+      setInvalidAttemptStep(step)
+      focusFirstInvalid(step, scan.session)
+      return
+    }
+    setInvalidAttemptStep(null)
+    advance()
   }
 
   return (
@@ -70,9 +83,9 @@ export function Scan() {
             <ScanStepNav
               step={step}
               session={scan.session}
-              canProceed={scan.canProceed}
+              showError={showError}
               onBack={scan.goBack}
-              onNext={onNext}
+              onNext={handleNext}
               nextLabel={step === 6 ? content.ui.nav.toResult : undefined}
             />
           )}

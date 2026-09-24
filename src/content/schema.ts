@@ -171,6 +171,19 @@ export const sourcesFileSchema = z.object({
   ),
 })
 
+export const bundlesFileSchema = z.object({
+  version: z.string(),
+  sourceIds: z.array(z.string()),
+  bundles: z.array(
+    z.object({
+      id: bundleIdSchema,
+      label: z.string(),
+      subtitle: z.string(),
+      description: z.string(),
+    }),
+  ),
+})
+
 export const uiFileSchema = z.object({
   version: z.string(),
   progressLabel: z.string(),
@@ -220,8 +233,10 @@ export const uiFileSchema = z.object({
       legendTitle: z.string().optional(),
       legalBadge: z.string().optional(),
       legalFromBadge: z.string().optional(),
+      startValue: z.number().optional(),
     }),
   ),
+  errorPolicy: z.string(),
   resultPlaceholder: z.object({
     title: z.string(),
     intro: z.string(),
@@ -265,6 +280,7 @@ export type StagesFile = z.infer<typeof stagesFileSchema>
 export type SourcesFile = z.infer<typeof sourcesFileSchema>
 export type RulesFile = z.infer<typeof rulesFileSchema>
 export type UiFile = z.infer<typeof uiFileSchema>
+export type BundlesFile = z.infer<typeof bundlesFileSchema>
 
 export type ContentBundle = {
   instruments: InstrumentsFile
@@ -278,6 +294,7 @@ export type ContentBundle = {
   sources: SourcesFile
   rules: RulesFile
   ui: UiFile
+  bundles: BundlesFile
 }
 
 export function validateUiReferences(
@@ -379,5 +396,18 @@ export function validateContentReferences(content: ContentBundle): void {
 
   for (const rule of content.rules.rules) {
     rule.sourceIds.forEach((s) => requireSource(s, `rules.json (${rule.id})`))
+  }
+
+  content.bundles.sourceIds.forEach((s) => requireSource(s, 'bundles.json'))
+  const bundleIds = new Set(content.bundles.bundles.map((b) => b.id))
+  for (const inst of content.instruments.instruments) {
+    if (!bundleIds.has(inst.bundle)) {
+      throw new Error(`Verwijzing: bundle "${inst.bundle}" in instruments.json ontbreekt in bundles.json`)
+    }
+  }
+  for (const b of content.bundles.bundles) {
+    if (!content.instruments.instruments.some((i) => i.bundle === b.id)) {
+      throw new Error(`Verwijzing: bundle "${b.id}" in bundles.json heeft geen instrumenten`)
+    }
   }
 }

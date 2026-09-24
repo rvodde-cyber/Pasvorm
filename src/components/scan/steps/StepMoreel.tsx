@@ -29,7 +29,7 @@ export function StepMoreel({ scan }: { scan: ScanSessionApi }) {
               <span>{scale.maxLabel}</span>
             </div>
             <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={item.statement}>
-              {Array.from({ length: scale.max - scale.min + 1 }, (_, i) => scale.min + i).map((v) => (
+              {Array.from({ length: scale.max - scale.min + 1 }, (_, i) => scale.min + i).map((v, vi) => (
                 <label
                   key={v}
                   className="flex cursor-pointer items-center gap-1 rounded-lg border border-line px-2 py-1 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-accent"
@@ -37,6 +37,8 @@ export function StepMoreel({ scan }: { scan: ScanSessionApi }) {
                   <input
                     type="radio"
                     name={`mmv-${item.id}`}
+                    id={vi === 0 ? `scan-focus-mmv-${item.id}` : undefined}
+                    data-scan-focus={vi === 0 ? `scan-focus-mmv-${item.id}` : undefined}
                     checked={current === v}
                     onChange={() =>
                       scan.setPartial({

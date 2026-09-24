@@ -7,7 +7,7 @@ export function StepPersoneel({ scan }: { scan: ScanSessionApi }) {
 
   return (
     <div className="space-y-2" role="radiogroup" aria-label={cfg.title}>
-      {content.context.workforce.options.map((opt) => (
+      {content.context.workforce.options.map((opt, idx) => (
         <label
           key={opt.id}
           className={`flex cursor-pointer gap-3 rounded-xl border p-4 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent ${
@@ -17,6 +17,8 @@ export function StepPersoneel({ scan }: { scan: ScanSessionApi }) {
           <input
             type="radio"
             name="workforce"
+            id={idx === 0 ? 'scan-focus-workforce' : undefined}
+            data-scan-focus={idx === 0 ? 'scan-focus-workforce' : undefined}
             checked={scan.session.workforce === opt.id}
             onChange={() => scan.setPartial({ workforce: opt.id as WorkforceId })}
             className="mt-1 accent-accent"

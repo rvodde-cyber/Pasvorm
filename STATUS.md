@@ -1,5 +1,23 @@
 # Pasvorm — STATUS
 
+## Sprint 2B — herstel na regiecontrole (360 px + axe)
+
+### Gedaan
+
+- `bundles.json` in schema + `content/index`; bundelkoppen (label, subtitle, description) op de instrumentenstap; bundle-id’s gekoppeld aan `instruments.json`.
+- Cultuur: startwaarde `ui.steps.cultuur.startValue` (0), status “Nog te verdelen: 100 punten”; invoer `aria-label` = beschrijvingstekst (geen kwadrantnamen in de stroom).
+- Lettertypen via `@fontsource/libre-franklin` (700, 800) en `@fontsource/source-sans-3` (400, 600); geen `fonts.googleapis.com` / `fonts.gstatic.com` in de build (inclusief `public/pasvorm-prototype.html`).
+- Instrumentenstap: compacte rij + segment-radiogroep per instrument (labels uit `stages.json`), accent-intensiteit per stadium; `InstrumentTile` / tik-cyclus verwijderd.
+- Foutbeleid `ui.errorPolicy`: Volgende altijd actief; `role="alert"` pas na klik Volgende + focus eerste open veld; geen fout bij stapwissel.
+- Groeifase: `aria-pressed`, toegankelijke naam met 1e/2e keus; badge boven de tekst.
+- Bronnen: `renderApa` voor `*cursief*` → `<em>`.
+- Tests: cultuur 0 + fout na Volgende, instrument-radiogroep/pijltjes, dist zonder Google Fonts, `renderApa`; axe (vitest-axe) per stap + resultaat + scan-shell (WCAG 2.2 AA). CI: build vóór test.
+- `tsconfig.test.json` voor test-typecheck naast `tsconfig.app` (alleen `src` in app-build).
+
+### Vragen aan regie
+
+- (geen nieuwe)
+
 ## Sprint 2 — nieuwe vragenstroom op regelmotor v1.0
 
 ### Gedaan

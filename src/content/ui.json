@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "progressLabel": "Stap {current} van {total}",
   "nav": {
     "back": "Terug",
@@ -57,7 +57,8 @@
       "over": "U heeft {n} punten te veel verdeeld.",
       "done": "Alle 100 punten zijn verdeeld.",
       "stepSize": 5,
-      "error": "Verdeel bij elk onderwerp precies 100 punten."
+      "error": "Verdeel bij elk onderwerp precies 100 punten.",
+      "startValue": 0
     },
     {
       "id": "toekomst",
@@ -75,7 +76,7 @@
     {
       "id": "instrumenten",
       "title": "Wat heeft u al geregeld?",
-      "intro": "Geef per instrument aan hoe ver het is. Tik op een tegel om het niveau te verhogen.",
+      "intro": "Kies per instrument het niveau dat het beste past bij uw organisatie.",
       "legendTitle": "Niveaus",
       "legalBadge": "Wettelijk verplicht",
       "legalFromBadge": "Wettelijk vanaf {n} medewerkers",
@@ -96,5 +97,6 @@
     "signalsTitle": "Signalen voor het gesprek",
     "ethicsTitle": "Morele kanttekeningen",
     "sourcesTitle": "Bronnen"
-  }
+  },
+  "errorPolicy": "Toon een foutmelding pas nadat de gebruiker op Volgende heeft geklikt en de stap nog niet compleet is."
 }

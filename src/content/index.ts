@@ -1,4 +1,5 @@
 import baselineData from './baseline.json'
+import bundlesData from './bundles.json'
 import contextData from './context.json'
 import cultureData from './culture.json'
 import instrumentsData from './instruments.json'
@@ -8,6 +9,7 @@ import phasesData from './phases.json'
 import rulesData from './rules.json'
 import {
   baselineFileSchema,
+  bundlesFileSchema,
   contextFileSchema,
   cultureFileSchema,
   type ContentBundle,
@@ -35,6 +37,7 @@ function loadContent(): ContentBundle {
     instruments,
     phases,
     baseline: parseContentFile('baseline.json', baselineFileSchema, baselineData),
+    bundles: parseContentFile('bundles.json', bundlesFileSchema, bundlesData),
     pairs: parseContentFile('pairs.json', pairsFileSchema, pairsData),
     culture: parseContentFile('culture.json', cultureFileSchema, cultureData),
     context: parseContentFile('context.json', contextFileSchema, contextData),

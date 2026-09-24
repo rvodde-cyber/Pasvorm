@@ -8,7 +8,7 @@ export function StepToekomst({ scan }: { scan: ScanSessionApi }) {
   return (
     <div className="space-y-4">
       <div className="space-y-2" role="radiogroup" aria-label={cfg.title}>
-        {content.context.future.options.map((opt) => (
+        {content.context.future.options.map((opt, idx) => (
           <label
             key={opt.id}
             className={`flex cursor-pointer gap-3 rounded-xl border p-4 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent ${
@@ -18,6 +18,8 @@ export function StepToekomst({ scan }: { scan: ScanSessionApi }) {
             <input
               type="radio"
               name="future"
+              id={idx === 0 ? 'scan-focus-future' : undefined}
+              data-scan-focus={idx === 0 ? 'scan-focus-future' : undefined}
               checked={scan.session.future === opt.id}
               onChange={() => scan.setPartial({ future: opt.id as FutureId })}
               className="mt-1 accent-accent"

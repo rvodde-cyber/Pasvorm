@@ -22,6 +22,8 @@ export function StepOrganisatie({ scan }: { scan: ScanSessionApi }) {
         <span className="text-xs font-semibold uppercase tracking-wide text-muted">{fields.size.label}</span>
         <span className="block text-xs text-muted">{fields.size.hint}</span>
         <input
+          id="scan-focus-size"
+          data-scan-focus="scan-focus-size"
           type="number"
           min={1}
           step={1}

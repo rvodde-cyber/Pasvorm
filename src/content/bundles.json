@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "sourceIds": [
+    "APP00",
+    "JIA12"
+  ],
+  "bundles": [
+    {
+      "id": "basis",
+      "label": "Basis",
+      "subtitle": "Wettelijke randvoorwaarden",
+      "description": "Wat de wet van elke werkgever vraagt."
+    },
+    {
+      "id": "ability",
+      "label": "Kunnen",
+      "subtitle": "Ability",
+      "description": "Instrumenten die zorgen dat mensen het werk aankunnen: werven, inwerken, opleiden."
+    },
+    {
+      "id": "motivation",
+      "label": "Willen",
+      "subtitle": "Motivation",
+      "description": "Instrumenten die mensen betrokken en gemotiveerd houden: gesprekken, belonen, groeien."
+    },
+    {
+      "id": "opportunity",
+      "label": "Bijdragen",
+      "subtitle": "Opportunity",
+      "description": "Instrumenten die mensen ruimte geven om mee te denken en mee te beslissen."
+    },
+    {
+      "id": "ethiek",
+      "label": "Moreel vakmanschap",
+      "subtitle": "Ethiek",
+      "description": "Instrumenten die integer handelen ondersteunen."
+    }
+  ]
+}

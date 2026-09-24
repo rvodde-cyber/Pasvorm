@@ -2,15 +2,18 @@ import { content } from '../content'
 import type { QuadrantId } from '../engine/types'
 import type { ScanSession } from './types'
 
-const evenSplit = (): Record<QuadrantId, number> => ({
-  clan: 25,
-  adhocracy: 25,
-  market: 25,
-  hierarchy: 25,
-})
+function cultureStartValue(): number {
+  const cultuur = content.ui.steps.find((s) => s.id === 'cultuur')
+  return cultuur?.startValue ?? 0
+}
+
+const emptyScores = (): Record<QuadrantId, number> => {
+  const v = cultureStartValue()
+  return { clan: v, adhocracy: v, market: v, hierarchy: v }
+}
 
 export function initialCulture(): ScanSession['culture'] {
-  const base = evenSplit()
+  const base = emptyScores()
   const out = {} as ScanSession['culture']
   for (const dim of content.culture.dimensions) {
     out[dim.id as keyof ScanSession['culture']] = { ...base }

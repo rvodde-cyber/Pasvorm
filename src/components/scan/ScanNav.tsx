@@ -62,20 +62,20 @@ export function ClearAnswersButton({ onClear }: { onClear: () => void }) {
 export function ScanStepNav({
   step,
   session,
-  canProceed,
+  showError,
   onBack,
   onNext,
   nextLabel,
 }: {
   step: number
   session: ScanSession
-  canProceed: boolean
+  showError: boolean
   onBack: () => void
   onNext: () => void
   nextLabel?: string
 }) {
   const nav = content.ui.nav
-  const err = canProceed ? null : stepError(step, session)
+  const err = showError ? stepError(step, session) : null
 
   return (
     <div className="mt-8 space-y-2">
@@ -95,9 +95,8 @@ export function ScanStepNav({
         </button>
         <button
           type="button"
-          disabled={!canProceed}
           onClick={onNext}
-          className="ml-auto rounded-lg bg-accent px-5 py-2 text-sm font-semibold text-accent-ink disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="ml-auto rounded-lg bg-accent px-5 py-2 text-sm font-semibold text-accent-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {nextLabel ?? nav.next}
         </button>

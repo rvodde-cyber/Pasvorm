@@ -1,16 +1,22 @@
-import { render, screen } from '@testing-library/react'
+import { cleanup, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it, vi } from 'vitest'
-import { InstrumentTile } from '../src/components/scan/InstrumentTile'
-import { togglePhaseChoice } from '../src/scan/phaseToggle'
-import { nextStage } from '../src/scan/stageCycle'
+import { MemoryRouter } from 'react-router-dom'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { Scan } from '../src/components/Scan'
+import { InstrumentStageRow } from '../src/components/scan/InstrumentStageRow'
+import { StepCultuur } from '../src/components/scan/steps/StepCultuur'
+import { content } from '../src/content'
 import { evaluate } from '../src/engine'
-import { createInitialSession } from '../src/scan/initial'
 import { fillExampleSession } from '../src/scan/exampleCase'
+import { createInitialSession } from '../src/scan/initial'
+import { togglePhaseChoice } from '../src/scan/phaseToggle'
 import { clearSession, loadSession, saveSession } from '../src/scan/storage'
 import { sessionToScanInput } from '../src/scan/types'
 import { isStepValid } from '../src/scan/validation'
 import testcases from './fixtures/testcases.json'
+import { mockScan } from './mockScan'
+
+afterEach(() => cleanup())
 
 describe('fasekeuze', () => {
   it('twee keuzes en ongedaan maken', () => {
@@ -31,37 +37,55 @@ describe('fasekeuze', () => {
 })
 
 describe('cultuurstap', () => {
-  it('Volgende pas geldig bij 3 × 100 punten', () => {
+  it('begint op 0 en is ongeldig tot 3 × 100 punten', () => {
     const session = createInitialSession()
-    expect(isStepValid(2, session)).toBe(true)
+    expect(session.culture.d1.clan).toBe(0)
+    expect(isStepValid(2, session)).toBe(false)
 
-    const uneven = {
-      ...session,
-      culture: {
-        ...session.culture,
-        d1: { clan: 40, adhocracy: 40, market: 40, hierarchy: 0 },
-      },
+    const even = { ...session }
+    for (const dim of content.culture.dimensions) {
+      even.culture = {
+        ...even.culture,
+        [dim.id]: { clan: 25, adhocracy: 25, market: 25, hierarchy: 25 },
+      }
     }
-    expect(isStepValid(2, uneven)).toBe(false)
+    expect(isStepValid(2, even)).toBe(true)
+  })
+
+  it('toont nog te verdelen bij start en fout na Volgende-klik', async () => {
+    const user = userEvent.setup()
+    clearSession()
+    const session = createInitialSession()
+    session.step = 2
+    saveSession(session)
+
+    render(
+      <MemoryRouter initialEntries={['/scan']}>
+        <Scan />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getAllByText(/Nog te verdelen: 100 punten/)[0]).toBeInTheDocument()
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: content.ui.nav.next }))
+    expect(screen.getByRole('alert')).toHaveTextContent(content.ui.steps[2].error!)
   })
 })
 
-describe('instrumententegel', () => {
-  it('vier tikken 0→1→2→3→0', () => {
-    expect(nextStage(0)).toBe(1)
-    expect(nextStage(1)).toBe(2)
-    expect(nextStage(2)).toBe(3)
-    expect(nextStage(3)).toBe(0)
-  })
-
-  it('klikt van 0 naar 1 in de UI', async () => {
+describe('instrumentenstap', () => {
+  it('heeft per instrument een radiogroep, pijltjestoetsen wisselen stadium', async () => {
     const user = userEvent.setup()
     const onStage = vi.fn()
-    render(
-      <InstrumentTile instrumentId="rie" stage={0} onStage={onStage} />,
-    )
-    const main = screen.getAllByRole('button')[0]
-    await user.click(main)
+    render(<InstrumentStageRow instrumentId="rie" stage={0} onStage={onStage} />)
+
+    const group = screen.getByRole('radiogroup', { name: /RI&E/i })
+    const radios = within(group).getAllByRole('radio')
+    expect(radios).toHaveLength(4)
+    expect(radios[0]).toBeChecked()
+
+    radios[0].focus()
+    await user.keyboard('{ArrowRight}')
     expect(onStage).toHaveBeenCalledWith(1)
   })
 })
@@ -87,5 +111,16 @@ describe('voorbeeldknop', () => {
     expect(result.priorities.map((p) => ({ instrumentId: p.instrumentId, rule: p.rule }))).toEqual(
       expected.priorities,
     )
+  })
+})
+
+describe('StepCultuur aria-labels', () => {
+  it('labelt invoer met beschrijving, niet kwadrantnaam', () => {
+    const session = createInitialSession()
+    render(<StepCultuur scan={mockScan(session)} />)
+    const dim = content.culture.dimensions[0]
+    const firstDesc = dim.items.clan
+    expect(screen.getAllByLabelText(firstDesc).length).toBeGreaterThan(0)
+    expect(screen.queryByLabelText(/clan/i)).not.toBeInTheDocument()
   })
 })

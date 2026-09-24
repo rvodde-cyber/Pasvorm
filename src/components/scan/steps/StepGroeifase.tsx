@@ -12,24 +12,33 @@ export function StepGroeifase({ scan }: { scan: ScanSessionApi }) {
     scan.setPartial(next)
   }
 
+  const firstPhaseId = content.phases.phases[0]?.id
+
   return (
     <div className="space-y-6">
       <div className="grid gap-3 sm:grid-cols-2">
         {content.phases.phases.map((p) => {
           const isFirst = scan.session.phaseFirst === p.id
           const isSecond = scan.session.phaseSecond === p.id
+          const pressed = isFirst || isSecond
+          const badge = isFirst ? cfg.firstBadge : isSecond ? cfg.secondBadge : null
+          const ariaLabel = badge ? `${badge}: ${p.vignette}` : p.vignette
           return (
             <button
               key={p.id}
               type="button"
+              id={p.id === firstPhaseId ? 'scan-focus-phase' : undefined}
+              data-scan-focus={p.id === firstPhaseId ? 'scan-focus-phase' : undefined}
+              aria-pressed={pressed}
+              aria-label={ariaLabel}
               onClick={() => onPhase(p.id)}
-              className={`relative rounded-xl border p-4 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
-                isFirst || isSecond ? 'border-accent bg-accent/10' : 'border-line bg-bg2 hover:border-accent/50'
+              className={`rounded-xl border p-4 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                pressed ? 'border-accent bg-accent/10' : 'border-line bg-bg2 hover:border-accent/50'
               }`}
             >
-              {(isFirst || isSecond) && (
-                <span className="absolute right-3 top-3 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase text-accent-ink">
-                  {isFirst ? cfg.firstBadge : cfg.secondBadge}
+              {badge && (
+                <span className="mb-2 inline-block rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase text-accent-ink">
+                  {badge}
                 </span>
               )}
               <p className="text-sm leading-relaxed text-ink">{p.vignette}</p>
@@ -49,7 +58,7 @@ export function StepGroeifase({ scan }: { scan: ScanSessionApi }) {
             <fieldset key={cid} className="space-y-2">
               <legend className="text-sm text-ink">{crisis.statement}</legend>
               <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={crisis.statement}>
-                {content.phases.crisisAnswers.map((ans) => (
+                {content.phases.crisisAnswers.map((ans, ai) => (
                   <label
                     key={ans.id}
                     className="flex cursor-pointer items-center gap-2 rounded-lg border border-line px-3 py-2 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent"
@@ -57,6 +66,8 @@ export function StepGroeifase({ scan }: { scan: ScanSessionApi }) {
                     <input
                       type="radio"
                       name={name}
+                      id={ai === 0 ? `scan-focus-crisis-${cid}` : undefined}
+                      data-scan-focus={ai === 0 ? `scan-focus-crisis-${cid}` : undefined}
                       checked={scan.session.crisis[crisis.id as keyof typeof scan.session.crisis] === ans.id}
                       onChange={() =>
                         scan.setPartial({

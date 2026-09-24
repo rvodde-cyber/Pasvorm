@@ -1,5 +1,6 @@
 import { content } from '../../../content'
 import type { EvaluateResult } from '../../../engine/types'
+import { renderApa } from '../../../utils/renderApa'
 
 const instrumentById = Object.fromEntries(
   content.instruments.instruments.map((i) => [i.id, i]),
@@ -103,7 +104,7 @@ export function StepResultaat({ result }: { result: EvaluateResult }) {
           <h3 className="font-heading text-base font-bold text-ink">{ui.sourcesTitle}</h3>
           <ul className="mt-2 space-y-2 text-xs text-muted">
             {sources.map((s) => (
-              <li key={s!.id}>{s!.apa}</li>
+              <li key={s!.id}>{renderApa(s!.apa)}</li>
             ))}
           </ul>
         </section>
