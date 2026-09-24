@@ -1,0 +1,100 @@
+{
+  "version": "1.0",
+  "progressLabel": "Stap {current} van {total}",
+  "nav": {
+    "back": "Terug",
+    "next": "Volgende",
+    "toResult": "Bekijk uw advies",
+    "example": "Vul een voorbeeld in (taxibedrijf, 400 medewerkers)",
+    "exampleCaseId": "T1",
+    "clear": "Wis mijn antwoorden",
+    "clearConfirm": "Weet u het zeker? Al uw antwoorden worden gewist.",
+    "clearYes": "Ja, wissen",
+    "clearCancel": "Annuleren",
+    "savedHint": "Uw antwoorden worden alleen op dit apparaat bewaard."
+  },
+  "steps": [
+    {
+      "id": "organisatie",
+      "title": "Uw organisatie",
+      "intro": "Twee korte vragen om te beginnen. De scan duurt ongeveer tien minuten.",
+      "fields": {
+        "orgName": {
+          "label": "Naam van de organisatie",
+          "hint": "Optioneel. Alleen voor op uw rapport.",
+          "placeholder": "Bijvoorbeeld: Taxi Brabant"
+        },
+        "size": {
+          "label": "Aantal medewerkers",
+          "hint": "Tel iedereen met een arbeidsovereenkomst, ook parttimers.",
+          "placeholder": "Bijvoorbeeld: 40",
+          "error": "Vul een aantal in van 1 of meer."
+        }
+      }
+    },
+    {
+      "id": "groeifase",
+      "title": "Hoe werkt uw organisatie?",
+      "intro": "Kies eerst de beschrijving die het meest lijkt op hoe het bij u werkt. Kies daarna de beschrijving die er het dichtst bij komt.",
+      "firstBadge": "1e keus",
+      "secondBadge": "2e keus",
+      "help": "Tik nogmaals op een kaart om uw keuze ongedaan te maken.",
+      "crisisTitle": "Herkent u dit?",
+      "crisisOrder": [
+        "c3",
+        "c1",
+        "c5",
+        "c2",
+        "c4"
+      ],
+      "error": "Kies twee beschrijvingen en beantwoord de vijf stellingen."
+    },
+    {
+      "id": "cultuur",
+      "title": "De cultuur van uw organisatie",
+      "intro": "Verdeel per onderwerp 100 punten over vier beschrijvingen. Er is geen goed of fout antwoord.",
+      "remaining": "Nog te verdelen: {n} punten",
+      "over": "U heeft {n} punten te veel verdeeld.",
+      "done": "Alle 100 punten zijn verdeeld.",
+      "stepSize": 5,
+      "error": "Verdeel bij elk onderwerp precies 100 punten."
+    },
+    {
+      "id": "toekomst",
+      "title": "De komende jaren",
+      "intro": "Het advies houdt rekening met de richting die u op wilt.",
+      "noteLabel": "Licht kort toe",
+      "error": "Kies één richting."
+    },
+    {
+      "id": "personeel",
+      "title": "Uw medewerkers",
+      "intro": "Het passende HR-beleid hangt af van hoe schaars en vervangbaar uw medewerkers zijn.",
+      "error": "Kies één typering."
+    },
+    {
+      "id": "instrumenten",
+      "title": "Wat heeft u al geregeld?",
+      "intro": "Geef per instrument aan hoe ver het is. Tik op een tegel om het niveau te verhogen.",
+      "legendTitle": "Niveaus",
+      "legalBadge": "Wettelijk verplicht",
+      "legalFromBadge": "Wettelijk vanaf {n} medewerkers",
+      "help": "Twijfelt u? Kies het lagere niveau."
+    },
+    {
+      "id": "moreel",
+      "title": "Ruimte voor moreel handelen",
+      "intro": "Vijf stellingen over hoe uw organisatie omgaat met morele vragen. Het gaat om de organisatie, niet om individuele medewerkers.",
+      "error": "Beantwoord alle vijf de stellingen."
+    }
+  ],
+  "resultPlaceholder": {
+    "title": "Uw eerste uitkomst",
+    "intro": "Het volledige rapport volgt in de volgende versie. Hieronder ziet u de kern van het advies.",
+    "prioritiesTitle": "Uw prioriteiten",
+    "temporaryTitle": "Tijdelijk inzetten of inhuren",
+    "signalsTitle": "Signalen voor het gesprek",
+    "ethicsTitle": "Morele kanttekeningen",
+    "sourcesTitle": "Bronnen"
+  }
+}

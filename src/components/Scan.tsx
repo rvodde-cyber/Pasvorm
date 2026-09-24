@@ -1,72 +1,86 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { TOTAL_STEPS, useScanState } from '../hooks/useScanState'
-import { StepCore } from './steps/StepCore'
-import { StepCvf } from './steps/StepCvf'
-import { StepFuture } from './steps/StepFuture'
-import { StepInstruments } from './steps/StepInstruments'
-import { StepIntro } from './steps/StepIntro'
-import { StepPhase } from './steps/StepPhase'
-import { StepResults } from './steps/StepResults'
-
-const FOOT_NOTE =
-  'Pasvorm — demoversie 0.2 (september 2026). Gebaseerd op Greiner (1972), Cameron & Quinn (2011), Lepak & Snell (1999), Boselie et al. (2005) en Appelbaum et al. (2000).'
+import { content } from '../content'
+import { useScanSession } from '../hooks/useScanSession'
+import { ProgressTape } from './ProgressTape'
+import { ClearAnswersButton, ScanStepNav } from './scan/ScanNav'
+import { StepCultuur } from './scan/steps/StepCultuur'
+import { StepGroeifase } from './scan/steps/StepGroeifase'
+import { StepInstrumenten } from './scan/steps/StepInstrumenten'
+import { StepMoreel } from './scan/steps/StepMoreel'
+import { StepOrganisatie } from './scan/steps/StepOrganisatie'
+import { StepPersoneel } from './scan/steps/StepPersoneel'
+import { StepResultaat } from './scan/steps/StepResultaat'
+import { StepToekomst } from './scan/steps/StepToekomst'
 
 export function Scan() {
-  const scan = useScanState()
-  const progress = Math.round((scan.stepIndex / TOTAL_STEPS) * 100)
-  const orgBadge = scan.org.trim() || 'demo'
+  const scan = useScanSession()
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const step = scan.session.step
+  const isResult = step >= 7
+  const stepCfg = isResult ? null : content.ui.steps[step]
+  const tapeStep = Math.min(step, 6)
+
+  useEffect(() => {
+    titleRef.current?.focus()
+  }, [step])
+
+  const onNext = () => {
+    if (step === 6) scan.goStep(7)
+    else scan.goNext()
+  }
 
   return (
     <div className="flex min-h-dvh flex-col bg-bg">
       <div className="mx-auto w-full max-w-3xl flex-1 px-4 py-4 md:px-5">
         <header className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5">
-            <div
-              className="size-6 shrink-0 rounded-md bg-gradient-to-br from-accent to-primary"
-              aria-hidden
-            />
-            <div>
-              <p className="font-heading text-sm font-extrabold leading-none text-ink">Pasvorm</p>
-              <p className="text-[10px] text-muted">HR-professionaliseringsscan · demoversie</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Link
-              to="/"
-              className="rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-muted hover:bg-surface hover:text-ink"
-            >
-              ← Terug naar overzicht
-            </Link>
-            <span className="rounded-full border border-line bg-bg2 px-2.5 py-1 text-[11px] font-semibold text-muted">
-              {orgBadge}
-            </span>
-          </div>
+          <Link
+            to="/"
+            className="rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-muted hover:bg-surface hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+          >
+            ←
+          </Link>
+          <p className="text-xs text-muted">{content.ui.nav.savedHint}</p>
         </header>
 
-        <div className="mb-4 h-1 overflow-hidden rounded-full bg-bg2">
-          <div
-            className="h-full bg-accent transition-all duration-300"
-            style={{ width: `${progress}%` }}
-            role="progressbar"
-            aria-valuenow={progress}
-            aria-valuemin={0}
-            aria-valuemax={100}
-          />
-        </div>
+        {!isResult && <ProgressTape currentStep={tapeStep} />}
 
-        <main>
-          {scan.step === 'intro' && <StepIntro scan={scan} />}
-          {scan.step === 'phase' && <StepPhase scan={scan} />}
-          {scan.step === 'cvf' && <StepCvf scan={scan} />}
-          {scan.step === 'future' && <StepFuture scan={scan} />}
-          {scan.step === 'core' && <StepCore scan={scan} />}
-          {scan.step === 'instruments' && <StepInstruments scan={scan} />}
-          {scan.step === 'results' && <StepResults scan={scan} />}
+        <main className="scan-card">
+          <h2
+            ref={titleRef}
+            tabIndex={-1}
+            className="mb-2 font-heading text-2xl font-extrabold text-ink outline-none"
+          >
+            {isResult ? content.ui.resultPlaceholder.title : stepCfg?.title}
+          </h2>
+          {!isResult && stepCfg?.intro && (
+            <p className="mb-5 text-muted leading-relaxed">{stepCfg.intro}</p>
+          )}
+
+          {step === 0 && <StepOrganisatie scan={scan} />}
+          {step === 1 && <StepGroeifase scan={scan} />}
+          {step === 2 && <StepCultuur scan={scan} />}
+          {step === 3 && <StepToekomst scan={scan} />}
+          {step === 4 && <StepPersoneel scan={scan} />}
+          {step === 5 && <StepInstrumenten scan={scan} />}
+          {step === 6 && <StepMoreel scan={scan} />}
+          {isResult && scan.result && <StepResultaat result={scan.result} />}
+
+          {!isResult && (
+            <ScanStepNav
+              step={step}
+              session={scan.session}
+              canProceed={scan.canProceed}
+              onBack={scan.goBack}
+              onNext={onNext}
+              nextLabel={step === 6 ? content.ui.nav.toResult : undefined}
+            />
+          )}
+
+          <div className="mt-6 border-t border-line pt-4">
+            <ClearAnswersButton onClear={scan.reset} />
+          </div>
         </main>
-
-        <footer className="mt-8 border-t border-line pt-3 text-center text-[10px] leading-relaxed text-muted">
-          {FOOT_NOTE}
-        </footer>
       </div>
     </div>
   )

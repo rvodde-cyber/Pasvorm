@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { bundles } from '../data/bundles'
-import { phases } from '../data/phases'
+import { content } from '../content'
 import { Modal } from './Modal'
 
 const FOOT_LEFT =
@@ -107,19 +106,10 @@ export function Landing() {
 
       <Modal open={modal === 'fase'} onClose={() => setModal(null)} title="Waar staat uw organisatie?" eyebrow="01 — Groeifase">
         <div className="space-y-3 text-muted">
-          <p>
-            Greiner (1972) onderscheidt vijf groeifasen, elk met een eigen manier van sturen: van
-            persoonlijke sturing door de directeur tot samenwerking in professionele teams.
-          </p>
-          <p>
-            HR-instrumenten die passen bij de ene fase kunnen in een andere fase averechts werken.
-            Pasvorm bepaalt in welke fase uw organisatie zich bevindt en welke bundel daar het beste
-            bij past.
-          </p>
           <ul className="list-disc space-y-1 pl-5 text-sm">
-            {phases.map((p) => (
+            {content.phases.phases.map((p) => (
               <li key={p.id}>
-                Fase {p.id} — {p.title}
+                {p.name} — {p.vignette}
               </li>
             ))}
           </ul>
@@ -133,15 +123,7 @@ export function Landing() {
         eyebrow="02 — Cultuur"
       >
         <div className="space-y-3 text-muted">
-          <p>
-            Het Competing Values Framework (Cameron & Quinn, 2011) onderscheidt vier cultuurtypen:
-            Familie, Adhocratie, Markt en Hiërarchie. Elke cultuur vraagt om een andere vorm van
-            HR-instrumenten.
-          </p>
-          <p>
-            Een werkoverleg in een familiecultuur werkt als persoonlijk gesprek; in een hiërarchische
-            cultuur als vaste procedure met notulen. Pasvorm past het advies aan op de dominante cultuur.
-          </p>
+          <p>{content.culture.question}</p>
         </div>
       </Modal>
 
@@ -151,36 +133,17 @@ export function Landing() {
         title="Instrumenten die elkaar versterken"
         eyebrow="03 — HR-bundels"
       >
-        <div className="space-y-3 text-muted">
-          <p>
-            Gebaseerd op Boselie et al. (2005) en het AMO-model (Appelbaum et al., 2000): HR-instrumenten
-            werken het best in samenhang. Pasvorm groepeert ze in vijf bundels.
-          </p>
-          <ul className="list-disc space-y-1 pl-5 text-sm">
-            {bundles.map((b) => (
-              <li key={b.id}>
-                <strong className="text-ink">{b.label.replace('-bundel', '')}</strong> — {b.description}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="list-disc space-y-1 pl-5 text-sm text-muted">
+          {['basis', 'ability', 'motivation', 'opportunity', 'ethiek'].map((b) => (
+            <li key={b}>
+              <strong className="text-ink">{b}</strong>
+            </li>
+          ))}
+        </ul>
       </Modal>
 
       <Modal open={modal === 'over'} onClose={() => setModal(null)} title="Zes stappen, circa tien minuten" eyebrow="Hoe werkt het?">
         <div className="space-y-3 text-muted">
-          <p>
-            De scan stelt zes gerichte vragen: groeifase, cultuurprofiel (vier stellingen), toekomstvisie
-            van de leiding, omvangrijkste personeelsgroep, en welke HR-instrumenten al aanwezig zijn.
-          </p>
-          <p>
-            Het resultaat combineert deze antwoorden tot een HR-profiel met een{' '}
-            <strong className="text-ink">concreet beginpunt</strong> — het ene instrument dat de grootste
-            hefboom biedt — plus twee vervolgstappen die het versterken.
-          </p>
-          <p>
-            Pasvorm is ontwikkeld vanuit het Model Moreel Vakmanschap en is bedoeld als startpunt voor
-            gesprek, niet als eenzijdig oordeel.
-          </p>
           <Link
             to="/scan"
             onClick={() => setModal(null)}

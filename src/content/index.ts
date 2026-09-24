@@ -19,15 +19,21 @@ import {
   rulesFileSchema,
   sourcesFileSchema,
   stagesFileSchema,
+  uiFileSchema,
   validateContentReferences,
+  validateUiReferences,
 } from './schema'
 import sourcesData from './sources.json'
 import stagesData from './stages.json'
+import uiData from './ui.json'
+import testcasesData from '../../tests/fixtures/testcases.json'
 
 function loadContent(): ContentBundle {
+  const instruments = parseContentFile('instruments.json', instrumentsFileSchema, instrumentsData)
+  const phases = parseContentFile('phases.json', phasesFileSchema, phasesData)
   const content: ContentBundle = {
-    instruments: parseContentFile('instruments.json', instrumentsFileSchema, instrumentsData),
-    phases: parseContentFile('phases.json', phasesFileSchema, phasesData),
+    instruments,
+    phases,
     baseline: parseContentFile('baseline.json', baselineFileSchema, baselineData),
     pairs: parseContentFile('pairs.json', pairsFileSchema, pairsData),
     culture: parseContentFile('culture.json', cultureFileSchema, cultureData),
@@ -36,8 +42,12 @@ function loadContent(): ContentBundle {
     stages: parseContentFile('stages.json', stagesFileSchema, stagesData),
     sources: parseContentFile('sources.json', sourcesFileSchema, sourcesData),
     rules: parseContentFile('rules.json', rulesFileSchema, rulesData),
+    ui: parseContentFile('ui.json', uiFileSchema, uiData),
   }
   validateContentReferences(content)
+  const crisisIds = content.phases.crisisSignals.map((c) => c.id)
+  const testcaseIds = testcasesData.cases.map((c) => c.id)
+  validateUiReferences(content.ui, crisisIds, testcaseIds)
   return content
 }
 
@@ -46,7 +56,6 @@ export const content = loadContent()
 export {
   parseContentFile,
   validateContentReferences,
+  validateUiReferences,
   type ContentBundle,
 } from './schema'
-
-export type { InstrumentsFile, PhasesFile, CultureFile, ContextFile, RulesFile } from './schema'

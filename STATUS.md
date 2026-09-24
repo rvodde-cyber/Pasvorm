@@ -1,5 +1,31 @@
 # Pasvorm — STATUS
 
+## Sprint 2 — nieuwe vragenstroom op regelmotor v1.0
+
+### Gedaan
+
+- `ui.json` in schema + `index.ts` (validatie `exampleCaseId` ↔ testcases, `crisisOrder` ↔ alle crisis-id's).
+- Nieuwe scanstate: `ScanInput` + `orgName` + `futureNote`; opslag `pasvorm:v2` (v1 wordt verwijderd bij laden).
+- Zeven stappen + resultaatplaceholder op `/scan`; teksten uit `ui.json` en overige content; advies via `evaluate()`.
+- `ProgressTape`, stapnavigatie met validatie/foutteksten uit UI, voorbeeldknop (casus `T1`).
+- Componenttests `tests/scan-components.test.tsx`; engine-fixtures blijven groen.
+- Oude `src/data/*`, `buildRecommendation` en `tests/recommendation.test.ts` verwijderd.
+
+### Handmatige check (24 sep 2026)
+
+- **360 px breed:** stap 0 en resultaat na voorbeeldknop leesbaar; voortgangsbalk en knoppen passen op smal scherm.
+- **Toetsenbord:** focusring op knoppen/velden zichtbaar; radiogroepen en segmentknoppen 0–3 bedienbaar; bevestiging wissen met Escape getest in sprint 1B-herstel.
+- **Invultijd volledige scan (handmatig, niet gestopt):** niet exact gemeten in deze sessie; voorbeeldknop → resultaat direct. Voor handmatige invulling blijft de richtlijn circa **10 minuten** (zoals in UI).
+
+### Regie — beantwoord
+
+- `rapport-meetlint.webp` → sprint 3.
+- `/_bron` blijft in Git.
+
+### Vragen aan regie
+
+- (geen nieuwe)
+
 ## Sprint 1B — herstel na regiecontrole + afronding 1A
 
 ### Gedaan (herstel)
@@ -8,11 +34,6 @@
 - **Cultuur gelijke stand:** `dominants[]` naast `dominant`; `tension` alleen als geen dominant in `expectedByPhase` staat; `form` = `dominants[0]`.
 - **Regressietests** in `tests/engine.test.ts` (f5/f4, f5/f5, gelijke stand f3, tension f1).
 - **Afronding 1A:** hero-bijschrift verwijderd; favicon `/favicon.svg`; bevestiging bij "Wis mijn antwoorden" (inline, focus Annuleren, Escape annuleert).
-
-### Vragen aan regie
-
-- Waar moet `rapport-meetlint.webp` gebruikt worden?
-- Horen de originele jpg's in `/_bron` in Git (samen ca. 2,4 MB), of moet `/_bron` in `.gitignore`?
 
 ## Sprint 1B — inhoud als data + regelmotor v1.0
 
@@ -75,7 +96,7 @@ pasvorm/
 ├── src/components/      Landing, Scan, Modal
 ├── src/components/steps/  Scanstappen (intro t/m resultaat)
 ├── src/content/         JSON-inhoud regie + schema + laden
-├── src/data/            Bundels, instrumenten, fasen, CVF, toekomst, core-opties, voorbeeld (UI, sprint 2)
+├── src/scan/            Scanstate, validatie, opslag v2
 ├── src/engine/          Regelmotor v1.0 (evaluate)
 ├── src/hooks/           useScanState (scantoestand + opslaan)
 ├── src/utils/           Cultuurprofiel, aanbevelingsalgoritme (legacy), localStorage
@@ -87,10 +108,10 @@ pasvorm/
 ## Werkende schermen en functies
 
 - Landingspagina `/` — tegels + modals, CTA naar scan, responsive (foto verborgen op mobiel).
-- Scan `/scan` — intro (org + omvang), groeifase, CVF-likert, toekomst, personeelsgroep, instrumenten, resultaat.
+- Scan `/scan` — organisatie, groeifase + crisis, cultuur (100-punten), toekomst, personeel, instrumenten (stadia 0–3), MMV, resultaat uit `evaluate()`.
 - Deep link `/scan` via `vercel.json` SPA-rewrite.
-- Voorbeeldinvul op intro → direct resultaat.
-- Geen server-side opslag; de scantoestand staat alleen in `localStorage` van de browser (`pasvorm:v1`) en is te wissen met "Wis mijn antwoorden".
+- Voorbeeldknop (taxibedrijf T1) → direct resultaat.
+- Opslag `localStorage` `pasvorm:v2`; wissen via bevestiging op intro/resultaat.
 
 ## Half af / bekende fouten
 

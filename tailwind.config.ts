@@ -20,6 +20,11 @@ export default {
         market: '#D08064',
         hierarchy: '#7FA6D1',
         ethiek: '#9B84C4',
+        'mmv-zien': '#6B9BD1',
+        'mmv-voelen': '#B88BC8',
+        'mmv-wegen': '#D9A85C',
+        'mmv-handelen': '#D08064',
+        'mmv-volhouden': '#8FB897',
       },
       fontFamily: {
         heading: ['"Libre Franklin"', 'system-ui', 'sans-serif'],

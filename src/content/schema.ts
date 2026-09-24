@@ -171,6 +171,68 @@ export const sourcesFileSchema = z.object({
   ),
 })
 
+export const uiFileSchema = z.object({
+  version: z.string(),
+  progressLabel: z.string(),
+  nav: z.object({
+    back: z.string(),
+    next: z.string(),
+    toResult: z.string(),
+    example: z.string(),
+    exampleCaseId: z.string(),
+    clear: z.string(),
+    clearConfirm: z.string(),
+    clearYes: z.string(),
+    clearCancel: z.string(),
+    savedHint: z.string(),
+  }),
+  steps: z.array(
+    z.object({
+      id: z.string(),
+      title: z.string(),
+      intro: z.string(),
+      fields: z
+        .object({
+          orgName: z.object({
+            label: z.string(),
+            hint: z.string(),
+            placeholder: z.string(),
+          }),
+          size: z.object({
+            label: z.string(),
+            hint: z.string(),
+            placeholder: z.string(),
+            error: z.string(),
+          }),
+        })
+        .optional(),
+      firstBadge: z.string().optional(),
+      secondBadge: z.string().optional(),
+      help: z.string().optional(),
+      crisisTitle: z.string().optional(),
+      crisisOrder: z.array(z.string()).optional(),
+      error: z.string().optional(),
+      remaining: z.string().optional(),
+      over: z.string().optional(),
+      done: z.string().optional(),
+      stepSize: z.number().optional(),
+      noteLabel: z.string().optional(),
+      legendTitle: z.string().optional(),
+      legalBadge: z.string().optional(),
+      legalFromBadge: z.string().optional(),
+    }),
+  ),
+  resultPlaceholder: z.object({
+    title: z.string(),
+    intro: z.string(),
+    prioritiesTitle: z.string(),
+    temporaryTitle: z.string(),
+    signalsTitle: z.string(),
+    ethicsTitle: z.string(),
+    sourcesTitle: z.string(),
+  }),
+})
+
 export const rulesFileSchema = z.object({
   version: z.string(),
   maxPriorities: z.number().int().positive(),
@@ -202,6 +264,7 @@ export type MmvFile = z.infer<typeof mmvFileSchema>
 export type StagesFile = z.infer<typeof stagesFileSchema>
 export type SourcesFile = z.infer<typeof sourcesFileSchema>
 export type RulesFile = z.infer<typeof rulesFileSchema>
+export type UiFile = z.infer<typeof uiFileSchema>
 
 export type ContentBundle = {
   instruments: InstrumentsFile
@@ -214,6 +277,27 @@ export type ContentBundle = {
   stages: StagesFile
   sources: SourcesFile
   rules: RulesFile
+  ui: UiFile
+}
+
+export function validateUiReferences(
+  ui: UiFile,
+  crisisIds: string[],
+  testcaseIds: string[],
+): void {
+  const groeifase = ui.steps.find((s) => s.id === 'groeifase')
+  if (!groeifase?.crisisOrder) {
+    throw new Error('ui.json: groeifase.crisisOrder ontbreekt')
+  }
+  const order = groeifase.crisisOrder
+  const expected = new Set(crisisIds)
+  const got = new Set(order)
+  if (expected.size !== got.size || [...expected].some((id) => !got.has(id))) {
+    throw new Error('ui.json: crisisOrder bevat niet alle crisis-id\'s uit phases.json')
+  }
+  if (!testcaseIds.includes(ui.nav.exampleCaseId)) {
+    throw new Error(`ui.json: exampleCaseId "${ui.nav.exampleCaseId}" ontbreekt in testcases.json`)
+  }
 }
 
 export function parseContentFile<T>(

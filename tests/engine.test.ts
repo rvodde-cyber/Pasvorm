@@ -4,6 +4,7 @@ import {
   instrumentsFileSchema,
   parseContentFile,
   validateContentReferences,
+  validateUiReferences,
   type ContentBundle,
 } from '../src/content/schema'
 import { evaluate } from '../src/engine'
@@ -66,6 +67,12 @@ describe('content schema', () => {
     expect(() =>
       parseContentFile('instruments.json', instrumentsFileSchema, { version: '1.0' }),
     ).toThrow(/^instruments\.json:/)
+  })
+
+  it('valideert ui.json verwijzingen', () => {
+    const crisisIds = content.phases.crisisSignals.map((c) => c.id)
+    const testcaseIds = testcases.cases.map((c) => c.id)
+    expect(() => validateUiReferences(content.ui, crisisIds, testcaseIds)).not.toThrow()
   })
 
   it('controleert verwijzingen tussen bestanden', () => {
