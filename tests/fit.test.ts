@@ -30,14 +30,14 @@ const gold: Record<string, Record<BundleId, Gold>> = {
     ability: { measured: 0.0, expected: 0.2, status: 'krap' },
     motivation: { measured: 0.0, expected: 0.2, status: 'krap' },
     opportunity: { measured: 0.0, expected: 0.3, status: 'krap' },
-    ethiek: { measured: 0.0, expected: 0.5, status: 'krap' },
+    ethiek: { measured: 0.0, expected: 0.5, status: 'krap', reason: 'legal' },
   },
   T2: {
     basis: { measured: 3.0, expected: 2.0, status: 'past' },
     ability: { measured: 0.0, expected: 1.2, status: 'krap' },
     motivation: { measured: 0.0, expected: 0.6, status: 'krap' },
     opportunity: { measured: 0.0, expected: 0.5, status: 'krap' },
-    ethiek: { measured: 0.0, expected: 1.0, status: 'krap' },
+    ethiek: { measured: 0.0, expected: 1.0, status: 'krap', reason: 'legal' },
   },
   T3: {
     basis: { measured: 1.7, expected: 1.7, status: 'krap', reason: 'legal' },
@@ -79,7 +79,7 @@ const gold: Record<string, Record<BundleId, Gold>> = {
     ability: { measured: 0.0, expected: 0.2, status: 'krap' },
     motivation: { measured: 0.0, expected: 0.2, status: 'krap' },
     opportunity: { measured: 0.0, expected: 0.3, status: 'krap' },
-    ethiek: { measured: 0.0, expected: 0.5, status: 'krap' },
+    ethiek: { measured: 0.0, expected: 0.5, status: 'krap', reason: 'legal' },
   },
 }
 

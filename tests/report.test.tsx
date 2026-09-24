@@ -2,6 +2,7 @@ import { cleanup, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
+import { apaSortKey, collectReportSourceIds } from '../src/components/report/collectSources'
 import { Report } from '../src/components/report/Report'
 import { Scan } from '../src/components/Scan'
 import { content } from '../src/content'
@@ -44,6 +45,14 @@ describe('Report', () => {
     renderCase('T4')
     expect(screen.getByText(content.ui.report.summary.sufficientStep)).toBeInTheDocument()
     expect(screen.getByText(content.rules.texts.sufficient)).toBeInTheDocument()
+  })
+
+  it('T1: ethiek met reden legal', () => {
+    renderCase('T1')
+    const fitSection = screen.getByRole('heading', { name: content.ui.report.fit.title }).parentElement!
+    const ethiek = content.bundles.bundles.find((b) => b.id === 'ethiek')!
+    const row = within(fitSection).getByText(ethiek.label, { exact: false }).closest('li')!
+    expect(row.textContent).toContain(content.ui.report.fit.reasons.legal)
   })
 
   it('T3: basis met reden legal', () => {
@@ -89,6 +98,26 @@ describe('Report', () => {
     renderCase('T1')
     const mmvSection = screen.getByRole('heading', { name: content.ui.report.mmv.title }).parentElement!
     expect(mmvSection.textContent).not.toContain(MODEL_NAME)
+  })
+
+  it('bronnenlijst volgt APA-sorteervolgorde', () => {
+    const session = sessionFromExampleCaseId('T1')!
+    const result = evaluate(sessionToScanInput(session))
+    render(<Report result={result} session={session} />)
+    const ids = collectReportSourceIds(result)
+    const section = screen.getByRole('heading', { name: content.ui.report.sourcesTitle }).parentElement!
+    const items = within(section!).getAllByRole('listitem')
+    expect(items.length).toBe(ids.length)
+    const sortedIds = [...ids].sort((a, b) => {
+      const apaA = content.sources.sources.find((s) => s.id === a)!.apa
+      const apaB = content.sources.sources.find((s) => s.id === b)!.apa
+      return apaSortKey(apaA).localeCompare(apaSortKey(apaB), 'nl', { sensitivity: 'base' })
+    })
+    expect(ids).toEqual(sortedIds)
+    for (let i = 0; i < ids.length; i++) {
+      const apa = content.sources.sources.find((s) => s.id === ids[i])!.apa
+      expect(items[i].textContent).toContain(apaSortKey(apa).slice(0, 20))
+    }
   })
 
   it('printknop zet titel en herstelt na afterprint', async () => {

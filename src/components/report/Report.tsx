@@ -360,7 +360,7 @@ export function Report({
         {fillTemplate(ui.printFooter, { date })}
       </p>
 
-      <p className="text-xs text-muted">
+      <p className="no-print text-xs text-muted">
         <a href="/licenses/OFL-libre-franklin.txt" className="text-accent underline">
           {ui.fontLicenses}
         </a>

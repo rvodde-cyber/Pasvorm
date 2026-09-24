@@ -1,5 +1,22 @@
 # Pasvorm — STATUS
 
+## Sprint 3B — herstel na regiecontrole
+
+### Gedaan
+
+- `bundleFit`: `reason: legal` bij elke bundel met `legalShort`; `cumulativeRequirements` via max per instrument.
+- Bronnenlijst gesorteerd op APA (`localeCompare`, `nl`, zonder `*`).
+- Link lettertypelicenties in rapport: `no-print` (pdf ≤ 4 pagina's); e2e pdf-paginatelling met `pdf-lib`.
+- `.gitignore`: `*.tsbuildinfo`, `test-results/`, `playwright-report/`.
+
+### Afwijkingen
+
+- (geen; Sprint 3-afwijking `legal` alleen op basis is opgelost)
+
+### Vragen aan regie
+
+- (geen nieuwe)
+
 ## Sprint 3 — rapport en pdf
 
 ### Gedaan
@@ -14,15 +31,11 @@
 
 ### Afwijkingen
 
-- `bundleFit.reason` = `legal` alleen voor bundel `basis` (goudtabel); overige krap-bundels met wettelijk instrument krijgen `shortfall` als reason, status blijft `krap` via `legalShort`.
+- ~~`bundleFit.reason` = `legal` alleen voor bundel `basis`~~ → opgelost in Sprint 3B.
 
 ### Vragen aan regie
 
 - (geen nieuwe)
-
-### Handmatig (nog door opdrachtgever)
-
-- Printvoorbeeld casus T1 in Chrome/Edge: A4, ≤ 4 pagina's, geen afgebroken kaarten; rapport op 360 px.
 
 ## Sprint 2B — herstel na regiecontrole (360 px + axe)
 

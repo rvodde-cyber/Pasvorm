@@ -12,7 +12,11 @@ function cumulativeRequirements(phaseId: PhaseId): Record<string, number> {
   const order = phaseOrderOf(phaseId)
   const out: Record<string, number> = {}
   for (const p of content.phases.phases) {
-    if (p.order <= order) Object.assign(out, content.baseline.requirements[p.id])
+    if (p.order > order) continue
+    const reqs = content.baseline.requirements[p.id] ?? {}
+    for (const [instId, need] of Object.entries(reqs)) {
+      out[instId] = Math.max(out[instId] ?? 0, need)
+    }
   }
   return out
 }
@@ -84,7 +88,7 @@ export function computeBundleFit(input: ScanInput, dominantPhase: PhaseId): Reco
 
     if (legalShort || shortfallRaw >= shortfallThreshold) {
       status = 'krap'
-      reason = legalShort && bundle === 'basis' ? 'legal' : 'shortfall'
+      reason = legalShort ? 'legal' : 'shortfall'
     } else if (
       !looseExcludes.includes(bundle) &&
       measuredRaw - expectedMeanRaw >= looseThreshold
