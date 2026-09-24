@@ -57,6 +57,11 @@ export const baselineFileSchema = z.object({
   sourceIds: z.array(z.string()),
   cumulative: z.boolean(),
   overweightPhaseDistance: z.number().int().min(0),
+  bundleFit: z.object({
+    shortfallThreshold: z.number(),
+    looseThreshold: z.number(),
+    looseExcludes: z.array(bundleIdSchema),
+  }),
   requirements: z.record(phaseIdSchema, z.record(z.string(), z.number().int().min(0).max(3))),
 })
 
@@ -237,14 +242,67 @@ export const uiFileSchema = z.object({
     }),
   ),
   errorPolicy: z.string(),
-  resultPlaceholder: z.object({
+  report: z.object({
     title: z.string(),
+    meta: z.string(),
+    orgFallback: z.string(),
     intro: z.string(),
+    privacy: z.string(),
+    actions: z.object({
+      print: z.string(),
+      printHint: z.string(),
+    }),
+    summary: z.object({
+      title: z.string(),
+      phase: z.string(),
+      culture: z.string(),
+      future: z.string(),
+      workforce: z.string(),
+      nextStep: z.string(),
+      transition: z.string(),
+      flat: z.string(),
+      sufficientStep: z.string(),
+    }),
+    fit: z.object({
+      title: z.string(),
+      intro: z.string(),
+      measured: z.string(),
+      expected: z.string(),
+      status: z.object({
+        krap: z.string(),
+        past: z.string(),
+        ruim: z.string(),
+      }),
+      reasons: z.object({
+        legal: z.string(),
+        shortfall: z.string(),
+        ruim: z.string(),
+      }),
+    }),
+    culture: z.object({
+      title: z.string(),
+      intro: z.string(),
+      dominant: z.string(),
+      hints: quadrantItemsSchema,
+    }),
+    mmv: z.object({
+      title: z.string(),
+      intro: z.string(),
+      low: z.string(),
+    }),
     prioritiesTitle: z.string(),
     temporaryTitle: z.string(),
+    workforceTitle: z.string(),
     signalsTitle: z.string(),
     ethicsTitle: z.string(),
+    method: z.object({
+      title: z.string(),
+      paragraphs: z.array(z.string()),
+      sourceIds: z.array(z.string()),
+    }),
     sourcesTitle: z.string(),
+    fontLicenses: z.string(),
+    printFooter: z.string(),
   }),
 })
 
@@ -410,4 +468,6 @@ export function validateContentReferences(content: ContentBundle): void {
       throw new Error(`Verwijzing: bundle "${b.id}" in bundles.json heeft geen instrumenten`)
     }
   }
+
+  content.ui.report.method.sourceIds.forEach((s) => requireSource(s, 'ui.json (report.method)'))
 }

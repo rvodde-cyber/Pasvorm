@@ -12,6 +12,12 @@ function walk(dir: string, files: string[] = []): string[] {
 }
 
 describe('build zonder Google Fonts', () => {
+  it('bevat fontlicenties in dist/licenses', () => {
+    const licenses = join(process.cwd(), 'dist', 'licenses')
+    expect(readFileSync(join(licenses, 'OFL-libre-franklin.txt'), 'utf8').length).toBeGreaterThan(100)
+    expect(readFileSync(join(licenses, 'OFL-source-sans-3.txt'), 'utf8').length).toBeGreaterThan(100)
+  })
+
   it('bevat geen fonts.googleapis.com of fonts.gstatic.com in dist', () => {
     const dist = join(process.cwd(), 'dist')
     const forbidden = ['fonts.googleapis.com', 'fonts.gstatic.com']

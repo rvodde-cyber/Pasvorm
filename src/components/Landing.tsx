@@ -102,6 +102,9 @@ export function Landing() {
 
       <footer className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-line px-5 py-2 text-[11px] text-muted md:px-8">
         <span>{FOOT_LEFT}</span>
+        <a href="/licenses/OFL-libre-franklin.txt" className="text-accent underline">
+          {content.ui.report.fontLicenses}
+        </a>
       </footer>
 
       <Modal open={modal === 'fase'} onClose={() => setModal(null)} title="Waar staat uw organisatie?" eyebrow="01 — Groeifase">

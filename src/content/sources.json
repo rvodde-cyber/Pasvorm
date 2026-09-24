@@ -74,8 +74,17 @@
     {
       "id": "MMV",
       "type": "model",
-      "apa": "Lectoraat Ethisch Werken. (z.d.). *Model Moreel Vakmanschap: Zien, Voelen, Wegen, Handelen, Volhouden*. Fontys Hogeschool HRM en Psychologie.",
-      "todo": "Auteursvermelding door Richard vast te stellen"
+      "apa": "Voddé, R. (2026, 16 juni). *Het Model Moreel Vakmanschap*. Community Moreel Vakmanschap. https://moreelvakmanschap.nl/model"
+    },
+    {
+      "id": "REST86",
+      "type": "wetenschap",
+      "apa": "Rest, J. R. (1986). *Moral development: Advances in research and theory*. Praeger."
+    },
+    {
+      "id": "KAP08",
+      "type": "wetenschap",
+      "apa": "Kaptein, M. (2008). Developing and testing a measure for the ethical culture of organizations: The corporate ethical virtues model. *Journal of Organizational Behavior, 29*(7), 923–947. https://doi.org/10.1002/job.520"
     },
     {
       "id": "AVG",

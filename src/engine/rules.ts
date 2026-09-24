@@ -1,5 +1,6 @@
 import { content } from '../content'
 import { evaluateCulture, quadrantLabel } from './culture'
+import { computeBundleFit } from './fit'
 import { evaluatePhase, phaseIdByOrder, phaseName, phaseOrderOf } from './phase'
 import type {
   BundleId,
@@ -334,6 +335,8 @@ export function evaluate(input: ScanInput): EvaluateResult {
     content.mmv.items.map((m) => [m.id, getMmvScore(input, m.id as MmvId)]),
   ) as Record<MmvId, MmvScore>
 
+  const bundleFit = computeBundleFit(input, phase.dominant)
+
   const result: EvaluateResult = {
     phase,
     culture,
@@ -346,6 +349,7 @@ export function evaluate(input: ScanInput): EvaluateResult {
     signals,
     ethicsNotes,
     bundleScores,
+    bundleFit,
     mmvScores,
   }
 

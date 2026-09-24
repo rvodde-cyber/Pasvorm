@@ -70,6 +70,16 @@ export interface EthicsNoteItem {
   note: string
 }
 
+export type BundleFitStatus = 'krap' | 'past' | 'ruim'
+export type BundleFitReason = 'legal' | 'shortfall' | 'ruim'
+
+export interface BundleFitEntry {
+  measured: number
+  expected: number
+  status: BundleFitStatus
+  reason?: BundleFitReason
+}
+
 export interface EvaluateResult {
   phase: PhaseOutcome
   culture: CultureOutcome
@@ -82,6 +92,7 @@ export interface EvaluateResult {
   signals: SignalItem[]
   ethicsNotes: EthicsNoteItem[]
   bundleScores: Record<BundleId, number>
+  bundleFit: Record<BundleId, BundleFitEntry>
   mmvScores: Record<MmvId, MmvScore>
   workforceNote?: string
   futureNote?: string

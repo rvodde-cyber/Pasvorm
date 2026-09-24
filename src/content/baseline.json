@@ -6,6 +6,11 @@
   ],
   "cumulative": true,
   "overweightPhaseDistance": 2,
+  "bundleFit": {
+    "shortfallThreshold": 0.5,
+    "looseThreshold": 1.5,
+    "looseExcludes": ["basis"]
+  },
   "requirements": {
     "f1": {
       "onboarding": 1,

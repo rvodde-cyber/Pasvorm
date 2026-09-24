@@ -9,7 +9,7 @@ import { StepInstrumenten } from '../src/components/scan/steps/StepInstrumenten'
 import { StepMoreel } from '../src/components/scan/steps/StepMoreel'
 import { StepOrganisatie } from '../src/components/scan/steps/StepOrganisatie'
 import { StepPersoneel } from '../src/components/scan/steps/StepPersoneel'
-import { StepResultaat } from '../src/components/scan/steps/StepResultaat'
+import { Report } from '../src/components/report/Report'
 import { StepToekomst } from '../src/components/scan/steps/StepToekomst'
 import { evaluate } from '../src/engine'
 import { fillExampleSession } from '../src/scan/exampleCase'
@@ -61,7 +61,7 @@ describe('axe WCAG 2.2 AA per stap', () => {
   it('resultaat na voorbeeldcasus', async () => {
     const session = fillExampleSession()
     const result = evaluate(sessionToScanInput(session))
-    const { container } = render(<StepResultaat result={result} />)
+    const { container } = render(<Report result={result} session={session} />)
     expect((await axe(container, axeOptions)).violations).toHaveLength(0)
   })
 })

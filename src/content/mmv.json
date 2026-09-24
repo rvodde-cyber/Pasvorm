@@ -1,7 +1,9 @@
 {
   "version": "1.0",
   "sourceIds": [
-    "MMV"
+    "MMV",
+    "REST86",
+    "KAP08"
   ],
   "question": "In hoeverre herkent u dit in uw organisatie?",
   "scale": {

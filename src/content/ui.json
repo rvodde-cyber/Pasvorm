@@ -89,14 +89,79 @@
       "error": "Beantwoord alle vijf de stellingen."
     }
   ],
-  "resultPlaceholder": {
-    "title": "Uw eerste uitkomst",
-    "intro": "Het volledige rapport volgt in de volgende versie. Hieronder ziet u de kern van het advies.",
+  "report": {
+    "title": "Uw Pasvorm-rapport",
+    "meta": "{org} · {size} medewerkers · {date}",
+    "orgFallback": "Uw organisatie",
+    "intro": "Dit rapport laat zien hoe uw HR-instrumentarium past bij de groeifase, de cultuur en de mensen van uw organisatie. Er bestaat geen universeel goed HR-beleid. Het gaat om de pasvorm.",
+    "privacy": "Uw antwoorden blijven in deze browser. Pasvorm verstuurt en bewaart niets op een server.",
+    "actions": {
+      "print": "Download als pdf",
+      "printHint": "Kies in het printvenster voor 'Opslaan als pdf'."
+    },
+    "summary": {
+      "title": "In één oogopslag",
+      "phase": "Groeifase",
+      "culture": "Cultuur",
+      "future": "Richting komende jaren",
+      "workforce": "Grootste personeelsgroep",
+      "nextStep": "Eerstvolgende stap",
+      "transition": "{phase}, in overgang naar {nextPhase}",
+      "flat": "Geen uitgesproken cultuur",
+      "sufficientStep": "Houd uw huidige instrumentarium op peil. Structureel is niets nodig."
+    },
+    "fit": {
+      "title": "De pasvorm per bundel",
+      "intro": "De balk toont hoe ver uw instrumenten gemiddeld zijn ontwikkeld, van 0 (niet aanwezig) tot 3 (structureel). Het streepje toont wat bij uw groeifase en omvang past.",
+      "measured": "Gemeten",
+      "expected": "Passend",
+      "status": {
+        "krap": "Te krap",
+        "past": "Past",
+        "ruim": "Ruim"
+      },
+      "reasons": {
+        "legal": "Een wettelijk verplicht instrument staat nog niet op papier.",
+        "shortfall": "Een of meer instrumenten blijven achter bij wat uw fase vraagt.",
+        "ruim": "Ruim is geen fout. U onderhoudt mogelijk meer dan uw fase nu vraagt."
+      }
+    },
+    "culture": {
+      "title": "Uw cultuurprofiel",
+      "intro": "Zo verdeelde u de punten, gemiddeld over leiderschap, bindmiddel en succes.",
+      "dominant": "Dominant",
+      "hints": {
+        "clan": "Samenwerking, betrokkenheid en vertrouwen",
+        "adhocracy": "Vernieuwing, ondernemen en experiment",
+        "market": "Resultaat, doelen en concurrentie",
+        "hierarchy": "Beheersing, regels en voorspelbaarheid"
+      }
+    },
+    "mmv": {
+      "title": "Moreel handelingsvermogen",
+      "intro": "Welke ruimte schept uw organisatie voor moreel handelen? Van 1 (helemaal niet) tot 5 (helemaal wel), voor vijf stappen: zien, voelen, wegen, handelen en volhouden.",
+      "low": "Aandachtspunt"
+    },
     "prioritiesTitle": "Uw prioriteiten",
     "temporaryTitle": "Tijdelijk inzetten of inhuren",
+    "workforceTitle": "Accent voor uw personeelsgroep",
     "signalsTitle": "Signalen voor het gesprek",
     "ethicsTitle": "Morele kanttekeningen",
-    "sourcesTitle": "Bronnen"
+    "method": {
+      "title": "Over deze scan",
+      "paragraphs": [
+        "Pasvorm gaat uit van best fit: HR-beleid werkt pas als het past bij fase, cultuur en mensen (Baird & Meshoulam, 1988; Boselie et al., 2005).",
+        "De groeifase volgt Greiner (1998). De cultuur volgt het Competing Values Framework (Cameron & Quinn, 2011). De bundels volgen het AMO-model (Appelbaum et al., 2000).",
+        "Het moreel handelingsvermogen meet de voorwaarden die uw organisatie schept voor moreel handelen, niet het handelen van individuele medewerkers.",
+        "De scan volgt daarvoor de vijf fasen van het Model Moreel Vakmanschap (Voddé, 2026), ontwikkeld binnen het Lectoraat Ethisch Werken. Het model bouwt voort op het vier-componentenmodel van Rest (1986).",
+        "De vertaling naar de organisatie sluit aan bij het model voor ethische cultuur van Kaptein (2008).",
+        "Deze scan is indicatief en wordt nog gevalideerd. Bespreek de uitkomst met collega's voordat u besluit."
+      ],
+      "sourceIds": ["BM88", "BOS05", "GRE98", "CQ11", "APP00", "MMV", "REST86", "KAP08"]
+    },
+    "sourcesTitle": "Bronnen",
+    "fontLicenses": "Lettertypelicenties",
+    "printFooter": "Pasvorm · Lectoraat Ethisch Werken, Fontys Hogeschool HRM en Psychologie · {date}"
   },
   "errorPolicy": "Toon een foutmelding pas nadat de gebruiker op Volgende heeft geklikt en de stap nog niet compleet is."
 }

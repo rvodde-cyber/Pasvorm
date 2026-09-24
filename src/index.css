@@ -1,6 +1,29 @@
 @import 'tailwindcss';
 @config '../tailwind.config.ts';
 
+:root {
+  --c-bg: #0e1a2b;
+  --c-bg2: #132238;
+  --c-surface: #17273d;
+  --c-ink: #edf1f6;
+  --c-muted: #a9b7c8;
+  --c-line: rgba(233, 238, 244, 0.13);
+  --c-accent: #c7973f;
+  --c-accent-ink: #241a08;
+  --c-primary: #7fa6d1;
+  --c-primary-ink: #0f1a26;
+  --c-clan: #8fb897;
+  --c-adhocracy: #d9a85c;
+  --c-market: #d08064;
+  --c-hierarchy: #7fa6d1;
+  --c-ethiek: #9b84c4;
+  --c-mmv-zien: #5b8fd4;
+  --c-mmv-voelen: #d9a441;
+  --c-mmv-wegen: #d97ba6;
+  --c-mmv-handelen: #3fa7a0;
+  --c-mmv-volhouden: #e07a5f;
+}
+
 @layer base {
   html {
     @apply font-body text-ink antialiased;
@@ -25,5 +48,87 @@
 @layer components {
   .scan-card {
     @apply rounded-2xl border border-line bg-surface p-5 shadow-2xl shadow-black/20 md:p-7;
+  }
+
+  .report-bar-track {
+    @apply relative h-3 overflow-hidden rounded border border-ink/20 bg-bg2;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .report-bar-fill {
+    @apply absolute inset-y-0 left-0 rounded-sm;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .report-bar-marker {
+    @apply absolute top-0 bottom-0 w-0.5 bg-ink;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm;
+  }
+
+  :root {
+    --c-bg: #ffffff;
+    --c-bg2: #f6f7f9;
+    --c-surface: #ffffff;
+    --c-ink: #14202f;
+    --c-muted: #4a5868;
+    --c-line: #d9dee5;
+    --c-accent: #8a6420;
+    --c-ethiek: #6b4fa0;
+    --c-mmv-zien: #2f6db5;
+    --c-mmv-voelen: #a8741a;
+    --c-mmv-wegen: #b8457a;
+    --c-mmv-handelen: #1f7f79;
+    --c-mmv-volhouden: #c0533a;
+  }
+
+  body {
+    background: #ffffff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .scan-card {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  #rapport h2,
+  #rapport h3 {
+    break-after: avoid;
+  }
+
+  #rapport li,
+  #rapport .report-card,
+  #rapport figure {
+    break-inside: avoid;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #rapport,
+  #rapport * {
+    visibility: visible;
+  }
+
+  #rapport {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
   }
 }

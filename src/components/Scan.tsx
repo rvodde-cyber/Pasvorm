@@ -4,6 +4,7 @@ import { content } from '../content'
 import { useScanSession } from '../hooks/useScanSession'
 import { focusFirstInvalid, isStepValid } from '../scan/validation'
 import { ProgressTape } from './ProgressTape'
+import { Report } from './report/Report'
 import { ClearAnswersButton, ScanStepNav } from './scan/ScanNav'
 import { StepCultuur } from './scan/steps/StepCultuur'
 import { StepGroeifase } from './scan/steps/StepGroeifase'
@@ -11,7 +12,6 @@ import { StepInstrumenten } from './scan/steps/StepInstrumenten'
 import { StepMoreel } from './scan/steps/StepMoreel'
 import { StepOrganisatie } from './scan/steps/StepOrganisatie'
 import { StepPersoneel } from './scan/steps/StepPersoneel'
-import { StepResultaat } from './scan/steps/StepResultaat'
 import { StepToekomst } from './scan/steps/StepToekomst'
 
 export function Scan() {
@@ -45,8 +45,10 @@ export function Scan() {
 
   return (
     <div className="flex min-h-dvh flex-col bg-bg">
-      <div className="mx-auto w-full max-w-3xl flex-1 px-4 py-4 md:px-5">
-        <header className="mb-4 flex flex-wrap items-center justify-between gap-3">
+      <div
+        className={`mx-auto w-full flex-1 px-4 py-4 md:px-5 ${isResult ? 'max-w-4xl' : 'max-w-3xl'}`}
+      >
+        <header className="no-print mb-4 flex flex-wrap items-center justify-between gap-3">
           <Link
             to="/"
             className="rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-muted hover:bg-surface hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
@@ -59,13 +61,15 @@ export function Scan() {
         {!isResult && <ProgressTape currentStep={tapeStep} />}
 
         <main className="scan-card">
-          <h2
-            ref={titleRef}
-            tabIndex={-1}
-            className="mb-2 font-heading text-2xl font-extrabold text-ink outline-none"
-          >
-            {isResult ? content.ui.resultPlaceholder.title : stepCfg?.title}
-          </h2>
+          {!isResult && (
+            <h2
+              ref={titleRef}
+              tabIndex={-1}
+              className="mb-2 font-heading text-2xl font-extrabold text-ink outline-none"
+            >
+              {stepCfg?.title}
+            </h2>
+          )}
           {!isResult && stepCfg?.intro && (
             <p className="mb-5 text-muted leading-relaxed">{stepCfg.intro}</p>
           )}
@@ -77,7 +81,9 @@ export function Scan() {
           {step === 4 && <StepPersoneel scan={scan} />}
           {step === 5 && <StepInstrumenten scan={scan} />}
           {step === 6 && <StepMoreel scan={scan} />}
-          {isResult && scan.result && <StepResultaat result={scan.result} />}
+          {isResult && scan.result && (
+            <Report result={scan.result} session={scan.session} />
+          )}
 
           {!isResult && (
             <ScanStepNav
@@ -90,7 +96,7 @@ export function Scan() {
             />
           )}
 
-          <div className="mt-6 border-t border-line pt-4">
+          <div className="no-print mt-6 border-t border-line pt-4">
             <ClearAnswersButton onClear={scan.reset} />
           </div>
         </main>

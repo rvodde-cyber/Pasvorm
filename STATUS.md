@@ -1,5 +1,29 @@
 # Pasvorm — STATUS
 
+## Sprint 3 — rapport en pdf
+
+### Gedaan
+
+- `bundleFit` in `baseline.json` + `src/engine/fit.ts`; `EvaluateResult.bundleFit`; goudtests `tests/fit.test.ts` (8 casussen).
+- `ui.json`: `report` (vervangt `resultPlaceholder`); bronnen `REST86`, `KAP08`, MMV-APA bijgewerkt; `mmv.json` sourceIds uitgebreid.
+- Rapport-UI `src/components/report/Report.tsx` op resultaatstap (`max-w-4xl`, `#rapport`); banner `rapport-meetlint.webp`; print via `window.print()`.
+- Kleuren via CSS-variabelen (`tailwind.config.ts`, `index.css`); MMV-huisstijl; `@media print` (A4, contrast, page breaks).
+- OFL-licenties in `public/licenses/`; link op landing en rapport.
+- Tests: `tests/report.test.tsx`, axe rapport T1/T8, Playwright e2e contrast (`tests/e2e/`), `fonts-build` licenties; CI: `test:e2e` na build.
+- Opdracht vastgelegd in `docs/regie/sprint-3.md`.
+
+### Afwijkingen
+
+- `bundleFit.reason` = `legal` alleen voor bundel `basis` (goudtabel); overige krap-bundels met wettelijk instrument krijgen `shortfall` als reason, status blijft `krap` via `legalShort`.
+
+### Vragen aan regie
+
+- (geen nieuwe)
+
+### Handmatig (nog door opdrachtgever)
+
+- Printvoorbeeld casus T1 in Chrome/Edge: A4, ≤ 4 pagina's, geen afgebroken kaarten; rapport op 360 px.
+
 ## Sprint 2B — herstel na regiecontrole (360 px + axe)
 
 ### Gedaan
@@ -126,7 +150,7 @@ pasvorm/
 ## Werkende schermen en functies
 
 - Landingspagina `/` — tegels + modals, CTA naar scan, responsive (foto verborgen op mobiel).
-- Scan `/scan` — organisatie, groeifase + crisis, cultuur (100-punten), toekomst, personeel, instrumenten (stadia 0–3), MMV, resultaat uit `evaluate()`.
+- Scan `/scan` — organisatie, groeifase + crisis, cultuur (100-punten), toekomst, personeel, instrumenten (stadia 0–3), MMV, Pasvorm-rapport (pdf via print).
 - Deep link `/scan` via `vercel.json` SPA-rewrite.
 - Voorbeeldknop (taxibedrijf T1) → direct resultaat.
 - Opslag `localStorage` `pasvorm:v2`; wissen via bevestiging op intro/resultaat.
