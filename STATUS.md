@@ -1,22 +1,61 @@
 # Pasvorm — STATUS
 
+## Sprint 1A — fundament onder de bestaande app
+
+### Gedaan
+
+- Remote gezet op `https://github.com/rvodde-cyber/Pasvorm.git`.
+- `.cursorrules` in de hoofdmap met de werkafspraken van de regie.
+- Tests: `vitest`, `@testing-library/react`, `@testing-library/jest-dom`, `jsdom`. Scripts `test` (`vitest run`) en `typecheck` (`tsc -b --noEmit`). Testconfiguratie in `vite.config.ts`, setup in `tests/setup.ts`.
+- Vastleggingstests in `tests/recommendation.test.ts` voor `buildRecommendation` (huidig gedrag, niet verbeterd):
+  - a. Voorbeeld schoonmaakbedrijf (200 mw) → `advies`, Werkoverleg op locatie; vervolg Interne communicatie, Erkenning & waardering; vorm procedure.
+  - b. Taxibedrijf (400 mw, fase 1, hiërarchie, alleen wettelijke basis) → `advies`, Onboardingprogramma; vervolg Gesprekscyclus, Werving & selectiebeleid.
+  - c. 30 mw zonder RI&E → `legal`, RI&E.
+  - d. 30 mw zonder OR → OR niet geëist; ter controle van de drempel: bij 50 mw wél `legal`, OR.
+  - e. Alle 24 instrumenten → `compleet`.
+- Opslaan: scantoestand in `localStorage` onder `pasvorm:v1` (`src/utils/storage.ts`, alle toegang in try/catch). Bij laden wordt elk veld gecontroleerd; ongeldige data valt terug op een lege scan. Na verversen gaat de scan verder op dezelfde stap. Een lege scan verwijdert de sleutel.
+- Knop "Wis mijn antwoorden" op de intro- en resultaatstap; maakt alle antwoorden en de opslag leeg en gaat naar de intro.
+- Beelden: `public/images/hero-meetlint.webp` (1600×1244, 188 kB) en `public/images/rapport-meetlint.webp` (1600×1244, 198 kB). Hero op de landingspagina met alt-tekst. Originele jpg's verplaatst naar `/_bron` (buiten `public`, dus niet in de build).
+- Opgeruimd: `src/assets/react.svg`, `src/assets/vite.svg`, `src/assets/hero.png`, `public/pasvorm-foto.jpg`.
+- CI: `.github/workflows/ci.yml` — bij elke push lint, typecheck, test en build op Node 22.
+
+### Afwijkingen
+
+- De voorbeeldinvulling staat nu in `src/data/example.ts` (inhoud ongewijzigd), zodat de knop op de introstap en test a dezelfde gegevens gebruiken.
+- `tsconfig.app.json` omvat nu ook `tests/`, zodat de tests meegetypecheckt worden.
+- "Nieuwe scan starten" op de resultaatstap wist nu ook de opslag (zelfde `reset` als "Wis mijn antwoorden").
+- De lege map `src/assets` kon lokaal niet verwijderd worden (geen rechten, waarschijnlijk OneDrive). Git bewaart geen lege mappen; in de repository bestaat hij niet.
+- `rapport-meetlint.webp` is aangemaakt maar nog nergens gebruikt; er is geen plek voor opgegeven.
+
+### Vragen aan regie
+
+- Onder de hero staat nog het onderschrift "Illustratie MKB-organisatie", terwijl de foto nu een meetlint toont. Tekst aanpassen of weghalen?
+- `index.html` verwijst naar favicon `/vite.svg`, die niet bestaat (ook vóór deze sprint niet). `public/favicon.svg` bestaat wel. Overschakelen?
+- Waar moet `rapport-meetlint.webp` gebruikt worden?
+- Moet "Wis mijn antwoorden" eerst om bevestiging vragen?
+- Horen de originele jpg's in `/_bron` in Git (samen ca. 2,4 MB), of moet `/_bron` in `.gitignore`?
+
 ## Stack
 
 - **React** 18.3.x, **Vite** 8.3, **TypeScript** ~6.0
 - **Tailwind CSS** 4.3 (`@tailwindcss/vite`)
 - **react-router-dom** 7.18
 - **oxlint** (dev)
+- **Vitest** 5, **Testing Library**, **jsdom** (dev)
 
 ## Mappenstructuur
 
 ```
 pasvorm/
-├── public/              Statische assets (foto, prototype HTML, icons, images/)
+├── .github/workflows/   CI (lint, typecheck, test, build)
+├── _bron/               Originele bronbeelden (niet in de build)
+├── public/              Statische assets (prototype HTML, icons, images/)
 ├── src/components/      Landing, Scan, Modal
 ├── src/components/steps/  Scanstappen (intro t/m resultaat)
-├── src/data/            Bundels, instrumenten, fasen, CVF, toekomst, core-opties
-├── src/hooks/           useScanState (sessiestate)
-├── src/utils/           Cultuurprofiel en aanbevelingsalgoritme
+├── src/data/            Bundels, instrumenten, fasen, CVF, toekomst, core-opties, voorbeeld
+├── src/hooks/           useScanState (scantoestand + opslaan)
+├── src/utils/           Cultuurprofiel, aanbevelingsalgoritme, localStorage
+├── tests/               Vitest-tests
 └── (root)               vite/tailwind/tsconfig, vercel.json, README.md
 ```
 
@@ -26,12 +65,11 @@ pasvorm/
 - Scan `/scan` — intro (org + omvang), groeifase, CVF-likert, toekomst, personeelsgroep, instrumenten, resultaat.
 - Deep link `/scan` via `vercel.json` SPA-rewrite.
 - Voorbeeldinvul op intro → direct resultaat.
-- Geen server-side opslag; state alleen in de sessie.
+- Geen server-side opslag; de scantoestand staat alleen in `localStorage` van de browser (`pasvorm:v1`) en is te wissen met "Wis mijn antwoorden".
 
 ## Half af / bekende fouten
 
 - GitHub-productie-deploy afhankelijk van Vercel-koppeling na push.
-- Meetlint / Firefly-afbeeldingen: map `public/images/` voorbereid; bestanden staan lokaal op PC, niet verplicht in UI.
 - Tijdelijke Vercel-URL (anonieme deploy) kan verlopen.
 
 ## Inhoud
@@ -44,6 +82,7 @@ pasvorm/
 | Personeelsgroep | 4 opties (Lepak & Snell) | `src/data/core.ts` |
 | HR-bundels | 5 bundels | `src/data/bundles.ts` |
 | Instrumenten | 24 stuks (legal, minSize, reinforces) | `src/data/instruments.ts` |
+| Voorbeeldinvulling | Schoonmaakbedrijf, 200 mw | `src/data/example.ts` |
 
 ## Advieslogica
 
@@ -53,7 +92,7 @@ pasvorm/
 4. Vervolg: tot 2 reinforces van anker die nog ontbreken.
 5. Dominante CVF uit likert → adviesvorm (dialoog / procedure / resultaten / pilot).
 
-**Bestand:** `src/utils/recommendation.ts` — **`buildRecommendation`**. Cultuur: `src/utils/culture.ts` — **`dominantCulture`**, **`cvfShares`**.
+**Bestand:** `src/utils/recommendation.ts` — **`buildRecommendation`**. Cultuur: `src/utils/culture.ts` — **`dominantCulture`**, **`cvfShares`**. Vastgelegd in `tests/recommendation.test.ts`.
 
 ## Bronnen in de app
 
@@ -70,7 +109,17 @@ npm run dev
 
 Dev-server: `http://127.0.0.1:43123` (zie `vite.config.ts`).
 
+Controles (ook in GitHub Actions):
+
 ```bash
+npm run lint
+npm run typecheck
+npm test
 npm run build
+```
+
+Deploy:
+
+```bash
 vercel deploy
 ```

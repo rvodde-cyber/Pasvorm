@@ -11,7 +11,7 @@ import {
   recommendationBundleLabel,
 } from '../../utils/recommendation'
 import { cvfShares, dominantCulture } from '../../utils/culture'
-import { StepLabel } from './StepNav'
+import { ClearAnswersButton, StepLabel } from './StepNav'
 
 function futureLabel(scan: ScanState): string {
   const f = futureOptions.find((o) => o.id === scan.futureId)
@@ -206,6 +206,7 @@ export function StepResults({ scan }: { scan: ScanState }) {
         >
           Terug naar vragen
         </button>
+        <ClearAnswersButton onClear={scan.reset} />
         <div className="ml-auto flex flex-wrap gap-2">
           <button
             type="button"

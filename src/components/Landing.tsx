@@ -90,8 +90,8 @@ export function Landing() {
 
         <aside className="relative hidden min-h-0 md:block">
           <img
-            src="/pasvorm-foto.jpg"
-            alt=""
+            src="/images/hero-meetlint.webp"
+            alt="Opgerold antiek meetlint naast een koperen schaar op een donkere houten tafel"
             className="h-full w-full object-cover opacity-85"
           />
           <div

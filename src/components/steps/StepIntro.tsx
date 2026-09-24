@@ -1,5 +1,5 @@
 import type { ScanState } from '../../hooks/useScanState'
-import { StepLabel } from './StepNav'
+import { ClearAnswersButton, StepLabel } from './StepNav'
 
 export function StepIntro({ scan }: { scan: ScanState }) {
   return (
@@ -46,7 +46,7 @@ export function StepIntro({ scan }: { scan: ScanState }) {
         </button>
       </div>
 
-      <div className="border-t border-line pt-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
         <button
           type="button"
           onClick={scan.fillExample}
@@ -54,6 +54,7 @@ export function StepIntro({ scan }: { scan: ScanState }) {
         >
           Vul voorbeeld in (schoonmaakbedrijf, 200 mw) → direct naar resultaat
         </button>
+        <ClearAnswersButton onClear={scan.reset} />
       </div>
     </div>
   )

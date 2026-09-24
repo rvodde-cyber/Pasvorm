@@ -34,6 +34,18 @@ export function StepNav({
   )
 }
 
+export function ClearAnswersButton({ onClear }: { onClear: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClear}
+      className="rounded-lg border border-line px-4 py-2 text-sm font-semibold text-muted hover:bg-surface hover:text-ink"
+    >
+      Wis mijn antwoorden
+    </button>
+  )
+}
+
 export function StepLabel({ children }: { children: ReactNode }) {
   return (
     <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-accent">{children}</p>

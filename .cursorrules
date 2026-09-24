@@ -1,0 +1,6 @@
+- Het regieplan van Claude is leidend. Bij twijfel stoppen en de vraag in STATUS.md zetten.
+- Geen eigen inhoud: vragen, teksten, drempels en adviesregels komen alleen uit src/content of src/data, aangeleverd door de regie.
+- Alleen de gevraagde sprint; geen extra functies.
+- Elke sprint eindigt met: lint, typecheck, test en build groen, STATUS.md bijgewerkt, één commit met sprintnummer, push.
+- Geen login, tracking, analytics, cookies of externe verzoeken.
+- Taal in de interface: Nederlands, u-vorm.
